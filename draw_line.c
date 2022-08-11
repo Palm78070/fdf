@@ -6,7 +6,7 @@
 /*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 20:27:07 by rthammat          #+#    #+#             */
-/*   Updated: 2022/08/11 19:40:38 by rthammat         ###   ########.fr       */
+/*   Updated: 2022/08/11 22:00:51 by rthammat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,50 @@ int	get_height(char *file)
 		s = get_next_line(fd);
 	}
 	free(s);
+	close(fd);
+	return (count);
+}
+
+int	count_width(char *s, int count)
+{
+	int	i;
+	int	count2;
+
+	i = -1;
+	count2 = 0;
+	while (s[++i] != '\n' && s[i] != '\0')
+	{
+		if (s[i] != ' ')
+			++count2;
+		if (s[i] != ' ' && s[i + 1] != ' ')
+		{
+			while (s[i] != ' ')
+				++i;
+		}
+	}
+	if (count2 > count)
+		count = count2;
+	return (count);
+}
+
+int	get_width(char *file)
+{
+	int	fd;
+	int	count;
+	char	*s;
+
+	fd = open(file, O_RDONLY);
+	count = 0;
+	if (fd < 0)
+		return (-1);
+	s = get_next_line(fd);
+	while (s != NULL)
+	{
+		count = count_width(s, count);
+		free(s);
+		s = get_next_line(fd);
+	}
+	free(s);
+	close(fd);
 	return (count);
 }
