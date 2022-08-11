@@ -3,29 +3,28 @@ NAME = fdf
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra -g
 
-#LIB = ./libft/libft.a
-#LIB_I = -I./libft/
-LIB = -lft
-LIB_I = -Llibft
+LIB = -lft -lmlx
+LIB_I = -Llibft -Lmlx
 
 SRCS = draw_line.c \
        test.c \
 
-OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
 
 libft:
 	@make -C ./libft
 
-$(NAME): libft 
-	$(CC) $(CFLAGS) -o $@ $(SRCS) $(LIB_I) $(LIB) -Lmlx -lmlx -framework OpenGL -framework AppKit
+$(NAME): libft
+	@make -C ./mlx
+	$(CC) $(CFLAGS) -o $@ $(SRCS) $(LIB_I) $(LIB) -framework OpenGL -framework AppKit
 
 norminette:
 	norminette -R CheckForbiddenHeader *.h *.c
 
 clean:
 	@make fclean -C ./libft
+	@make clean -C ./mlx
 	rm -rf *.dSYM *.o $(NAME)
 
 fclean: clean
