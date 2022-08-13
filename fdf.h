@@ -6,7 +6,7 @@
 /*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 17:05:52 by rthammat          #+#    #+#             */
-/*   Updated: 2022/08/12 23:21:30 by rthammat         ###   ########.fr       */
+/*   Updated: 2022/08/13 19:16:06 by rthammat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,21 +24,23 @@ typedef struct f_fdf
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
-	int	**tab;
-	int	x1;
-	int	y1;
-	int	x2;
-	int	y2;
-	int	height;
-	int	width;
+	int		**tab;
+	int		x1;
+	int		y1;
+	int		x2;
+	int		y2;
+	int		height;
+	int		width;
 }	t_fdf;
 
 //drawline.c
 void	draw_line(t_fdf *fdf);
-int	get_height(char *file);
-int	get_width(char *file);
+int		get_height(char *file);
+int		get_width(char *file);
 //table.c
 void	free_tab(t_fdf *fdf);
-int	**create_tab(t_fdf *fdf);
-
+int		**create_tab(t_fdf *fdf);
+void	fill_tab(t_fdf *fdf, char *file);
+//test.c
+void	free_all(t_fdf *fdf);
 #endif

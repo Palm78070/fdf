@@ -6,7 +6,7 @@
 /*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 20:27:07 by rthammat          #+#    #+#             */
-/*   Updated: 2022/08/12 23:01:50 by rthammat         ###   ########.fr       */
+/*   Updated: 2022/08/13 22:03:30 by rthammat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,8 @@ int	get_width(char *file)
 			++count;
 		free_double(s2);
 	}
+	while (s != NULL)
+		s = get_next_line(fd);
 	free(s);
 	close(fd);
 	return (count);

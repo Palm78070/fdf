@@ -6,11 +6,12 @@
 /*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 18:20:46 by rthammat          #+#    #+#             */
-/*   Updated: 2022/08/11 20:18:54 by rthammat         ###   ########.fr       */
+/*   Updated: 2022/08/13 22:06:15 by rthammat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdio.h>
 
 char	*ft_nextline(char *buffer, size_t l_len)
 {
