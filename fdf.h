@@ -6,7 +6,7 @@
 /*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 17:05:52 by rthammat          #+#    #+#             */
-/*   Updated: 2022/08/13 19:16:06 by rthammat         ###   ########.fr       */
+/*   Updated: 2022/08/14 02:15:36 by rthammat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct f_fdf
 }	t_fdf;
 
 //drawline.c
-void	draw_line(t_fdf *fdf);
+void	line(t_fdf *fdf, int x2, int y2);
 int		get_height(char *file);
 int		get_width(char *file);
 //table.c

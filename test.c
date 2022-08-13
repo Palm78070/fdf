@@ -6,7 +6,7 @@
 /*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 20:17:49 by rthammat          #+#    #+#             */
-/*   Updated: 2022/08/13 22:03:58 by rthammat         ###   ########.fr       */
+/*   Updated: 2022/08/14 02:18:14 by rthammat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,9 @@ int	main(int argc, char **argv)
 	fdf_init(fdf);
 	fdf->height = get_height(argv[1]);
 	fdf->width = get_width(argv[1]);
-	printf("%i\n", fdf->height);
-	printf("%i\n", fdf->width);
+	printf("height %i\n", fdf->height);
+	printf("height2 %i\n", get_height(argv[1]));
+	printf("width %i\n", fdf->width);
 	if (fdf->height < 0 || fdf->width < 0)
 	{
 		free_all(fdf);
@@ -73,20 +74,21 @@ int	main(int argc, char **argv)
 		int j = 0;
 		while (j < fdf->width)
 		{
-			printf("%i", fdf->tab[i][j]);
-			printf(" ");
+			printf("%3i", fdf->tab[i][j]);
+			//printf(" ");
 			++j;
 		}
 		printf("\n");
 		++i;
 	}
-	/*draw_line(fdf);
-	fdf->x1 = 0;
-	fdf->y1 = 500;
-	fdf->x2 = 500;
-	fdf->y2 = 0;
-	draw_line(fdf);
-	mlx_loop(fdf->mlx_ptr);*/
+	/*draw_line(fdf, 500, 500);
+	//fdf->x1 = 0;
+	//fdf->y1 = 500;
+	//fdf->x2 = 500;
+	//fdf->y2 = 0;
+	set_start(fdf, 0, 500);
+	draw_line(fdf, 500, 0);*/
+	//mlx_loop(fdf->mlx_ptr);
 	free_all(fdf);
 	return (0);
 }

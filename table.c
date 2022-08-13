@@ -6,7 +6,7 @@
 /*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 21:28:47 by rthammat          #+#    #+#             */
-/*   Updated: 2022/08/13 22:03:54 by rthammat         ###   ########.fr       */
+/*   Updated: 2022/08/14 00:21:56 by rthammat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	**create_tab(t_fdf *fdf)
 	int	i;
 
 	i = -1;
-	fdf->tab = (int **)malloc(fdf->height * sizeof(int *));
+	fdf->tab = (int **)malloc((fdf->height) * sizeof(int *));
 	if (!fdf->tab)
 	{
 		perror("error");
