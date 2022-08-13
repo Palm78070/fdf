@@ -7,8 +7,8 @@ LIB = -lft -lmlx
 LIB_I = -Llibft -Lmlx
 
 SRCS = draw_line.c \
+       table.c \
        test.c \
-
 
 all: $(NAME)
 

@@ -6,7 +6,7 @@
 /*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 20:27:07 by rthammat          #+#    #+#             */
-/*   Updated: 2022/08/12 02:18:09 by rthammat         ###   ########.fr       */
+/*   Updated: 2022/08/12 23:01:50 by rthammat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,10 @@ int	get_height(char *file)
 	fd = open(file, O_RDONLY);
 	count = 0;
 	if (fd < 0)
+	{
+		perror("error");
 		return (-1);
+	}
 	s = get_next_line(fd);
 	while (s != NULL)
 	{
@@ -76,7 +79,10 @@ int	get_width(char *file)
 	fd = open(file, O_RDONLY);
 	count = 0;
 	if (fd < 0)
+	{
+		perror("error");
 		return (-1);
+	}
 	s = get_next_line(fd);
 	if (s != NULL)
 	{
