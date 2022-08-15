@@ -6,56 +6,58 @@
 /*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 20:17:49 by rthammat          #+#    #+#             */
-/*   Updated: 2022/08/14 02:18:14 by rthammat         ###   ########.fr       */
+/*   Updated: 2022/08/15 21:36:58 by rath             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	fdf_init(t_fdf *fdf)
+void	dt_init(t_fdf *dt)
 {
-	//fdf->mlx_ptr = mlx_init();
-	//fdf->win_ptr = mlx_new_window(fdf->mlx_ptr, 500,500, "mlx 42");
-	fdf->tab = NULL;
-	fdf->x1 = 0;
-	fdf->y1 = 0;
-	fdf->x2 = 500;
-	fdf->y2 = 500;
-	fdf->height = 0;
-	fdf->width = 0;
+	dt->mlx_ptr = mlx_init();
+	dt->sc_w = 800;
+	dt->sc_h = 800;
+	dt->win_ptr = mlx_new_window(dt->mlx_ptr, dt->sc_w, dt->sc_h, "fdf");
+	dt->tab = NULL;
+	dt->x1 = 0;
+	dt->y1 = 0;
+	dt->x2 = 500;
+	dt->y2 = 500;
+	dt->height = 0;
+	dt->width = 0;
+	dt->zm = 0;
 }
 
-void	free_all(t_fdf *fdf)
+void	free_all(t_fdf *dt)
 {
-	if (fdf->tab)
-		free_tab(fdf);
-	free(fdf);
+	if (dt->tab)
+		free_tab(dt);
+	free(dt);
 }
 
 int	main(int argc, char **argv)
 {
-	t_fdf	*fdf;
+	t_fdf	*dt;
 
 	if (argc <= 1)
 	{
 		ft_putstr_fd("No file argument included\n", 2);
 		exit(1);
 	}
-	fdf = (t_fdf *)malloc(sizeof(t_fdf));
-	if (!fdf)
+	dt = (t_fdf *)malloc(sizeof(t_fdf));
+	if (!dt)
 		exit(1);
-	fdf_init(fdf);
-	fdf->height = get_height(argv[1]);
-	fdf->width = get_width(argv[1]);
-	printf("height %i\n", fdf->height);
-	printf("height2 %i\n", get_height(argv[1]));
-	printf("width %i\n", fdf->width);
-	if (fdf->height < 0 || fdf->width < 0)
+	dt_init(dt);
+	dt->height = get_height(argv[1]);
+	dt->width = get_width(argv[1]);
+	printf("height %i\n", dt->height);
+	printf("width %i\n", dt->width);
+	if (dt->height < 0 || dt->width < 0)
 	{
-		free_all(fdf);
+		free_all(dt);
 		exit(-1);
 	}
-	fdf->tab = create_tab(fdf);
+	dt->tab = create_tab(dt);
 	int i = 0;
 	/*while (i < fdf->height)
 	{
@@ -67,28 +69,25 @@ int	main(int argc, char **argv)
 		}
 		++i;
 	}*/
-	fill_tab(fdf, argv[1]);
+	fill_tab(dt, argv[1]);
 	i = 0;
-	while (i < fdf->height)
+	while (i < dt->height)
 	{
 		int j = 0;
-		while (j < fdf->width)
+		while (j < dt->width)
 		{
-			printf("%3i", fdf->tab[i][j]);
+			printf("%3i", dt->tab[i][j]);
 			//printf(" ");
 			++j;
 		}
 		printf("\n");
 		++i;
 	}
-	/*draw_line(fdf, 500, 500);
-	//fdf->x1 = 0;
-	//fdf->y1 = 500;
-	//fdf->x2 = 500;
-	//fdf->y2 = 0;
-	set_start(fdf, 0, 500);
-	draw_line(fdf, 500, 0);*/
-	//mlx_loop(fdf->mlx_ptr);
-	free_all(fdf);
+	dt->zm = 20;
+	draw(dt);
+	//set_start(dt, 15, 0);
+	//line(dt, 25, 5);
+	mlx_loop(dt->mlx_ptr);
+	free_all(dt);
 	return (0);
 }

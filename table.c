@@ -6,21 +6,21 @@
 /*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 21:28:47 by rthammat          #+#    #+#             */
-/*   Updated: 2022/08/14 00:21:56 by rthammat         ###   ########.fr       */
+/*   Updated: 2022/08/15 18:25:29 by rath             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	free_tab(t_fdf *fdf)
+void	free_tab(t_fdf *dt)
 {
 	int	i;
 
 	i = -1;
-	while (++i < fdf->height)
-		free(fdf->tab[i]);
-	free(fdf->tab);
-	fdf->tab = NULL;
+	while (++i < dt->height)
+		free(dt->tab[i]);
+	free(dt->tab);
+	dt->tab = NULL;
 }
 
 void	clear_tab(int **tab, int i)
@@ -33,33 +33,33 @@ void	clear_tab(int **tab, int i)
 	free(tab);
 }
 
-int	**create_tab(t_fdf *fdf)
+int	**create_tab(t_fdf *dt)
 {
 	int	i;
 
 	i = -1;
-	fdf->tab = (int **)malloc((fdf->height) * sizeof(int *));
-	if (!fdf->tab)
+	dt->tab = (int **)malloc((dt->height) * sizeof(int *));
+	if (!dt->tab)
 	{
 		perror("error");
-		free_all(fdf);
+		free_all(dt);
 		exit(1);
 	}
-	while (++i < fdf->height)
+	while (++i < dt->height)
 	{
-		fdf->tab[i] = (int *)malloc(fdf->width * sizeof(int));
-		if (!fdf->tab[i])
+		dt->tab[i] = (int *)malloc(dt->width * sizeof(int));
+		if (!dt->tab[i])
 		{
-			clear_tab(fdf->tab, i);
+			clear_tab(dt->tab, i);
 			perror("error");
-			free_all(fdf);
+			free_all(dt);
 			exit(1);
 		}
 	}
-	return (fdf->tab);
+	return (dt->tab);
 }
 
-void	insert_num(t_fdf *fdf, char *s)
+void	insert_num(t_fdf *dt, char *s)
 {
 	static int	h = 0;
 	int	w;
@@ -68,21 +68,21 @@ void	insert_num(t_fdf *fdf, char *s)
 	sp = ft_split(s, ' ');
 	if (!sp)
 	{
-		free_all(fdf);
+		free_all(dt);
 		perror("error");
 		exit(1);
 	}
 	w = 0;
 	while (sp[w] != NULL)
 	{
-		fdf->tab[h][w] = ft_atoi(sp[w]);
+		dt->tab[h][w] = ft_atoi(sp[w]);
 		++w;
 	}
 	++h;
 	free_double(sp);
 }
 
-void	fill_tab(t_fdf *fdf, char *file)
+void	fill_tab(t_fdf *dt, char *file)
 {
 	int	fd;
 	char	*s;
@@ -91,13 +91,13 @@ void	fill_tab(t_fdf *fdf, char *file)
 	if (fd < 0)
 	{
 		perror("error");
-		free_all(fdf);
+		free_all(dt);
 		exit(1);
 	}
 	s = get_next_line(fd);
 	while (s != NULL)
 	{
-		insert_num(fdf, s);
+		insert_num(dt, s);
 		free(s);
 		s = get_next_line(fd);
 	}

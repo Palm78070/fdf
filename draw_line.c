@@ -6,7 +6,7 @@
 /*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 20:27:07 by rthammat          #+#    #+#             */
-/*   Updated: 2022/08/14 02:18:09 by rthammat         ###   ########.fr       */
+/*   Updated: 2022/08/15 21:05:59 by rath             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@
 	}
 }*/
 
-void	line(t_fdf *fdf, int x2, int y2)
+void	line(t_fdf *dt, int x2, int y2)
 {
 	int	x;
 	int	y;
@@ -52,55 +52,66 @@ void	line(t_fdf *fdf, int x2, int y2)
 	int	dy;
 	int	p;
 
-	x = fdf->x1;
-	y = fdf->y1;
-	dx = x2 - fdf->x1;
-	dy = y2 - fdf->y1;
+	x2 *= dt->zm;
+	y2 *= dt->zm;
+	x = (dt->x1) * dt->zm;
+	y = (dt->y1) * dt->zm;
+	//dx = x2 - fdf->x1;
+	//dy = y2 - fdf->y1;
+	dx = x2 - x;
+	dy = y2 - y;
 	if (dy < 0)
 		dy *= -1;
 	p = (2 * dy) - dx;
-	while (x <= x2)
+	while (x <= x2 || y != y2)
 	{
-		mlx_pixel_put(fdf->mlx_ptr, fdf->win_ptr, x, y, 0xFFFFFF);
-		++x;
+		//if (y2 == (dt->y1 + 1) * dt->zm)
+		//	printf("xxx\n");
+		mlx_pixel_put(dt->mlx_ptr, dt->win_ptr, x, y, 0xFFFFFF);
+		if (x <= x2)
+			++x;
 		if (p < 0)
 			p = p + (2 * dy);
 		else
 		{
 			p = p + (2 * dy) - (2 * dx);
-			if (fdf->y1 <= y2)
+			if ((dt->y1 * dt->zm) <= y2 && y != y2)
 				++y;
-			else
+			else if (y != y2)
 				--y;
 		}
 	}
 }
 
-/*void	set_start(t_fdf *fdf, int x, int y)
+void	set_start(t_fdf *dt, int x, int y)
 {
-	fdf->x1 = x;
-	fdf->y1 = y;
+	dt->x1 = x;
+	dt->y1 = y;
 }
 
-void	draw(t_fdf *fdf)
+void	draw(t_fdf *dt)
 {
-	set_start(fdf, 0, 0);
-	while (fdf->y1 < fdf->height)
+	int	height;
+	int	width;
+	int	start;
+
+	start = dt->sc_w / (2 * dt->zm) - (dt->width / 2);
+	printf("start %i\n", start);
+	set_start(dt, start, 0);
+	height = dt->height + dt->y1;
+	width = dt->width + dt->x1;
+	while (dt->y1 < height)
 	{
-		fdf->x1 = 0;
-		while (fdf->x1 < fdf->width)
+		dt->x1 = start;
+		while (dt->x1 < width)
 		{
-			fdf->x2 = fdf->x1 + 1;
-			fdf->y2 = fdf->y1;
-			line(fdf);
-			fdf->x2 = fdf->x1;
-			fdf->y2 = fdf->y1 + 1;
-			line(fdf);
-			fdf->x1 += 1;
+			line(dt, dt->x1 + 1, dt->y1);
+			line(dt, dt->x1, dt->y1 + 1);
+			dt->x1 += 1;
 		}
-		fdf->y1 += 1;
+		dt->y1 += 1;
 	}
-}*/
+}
 
 int	get_height(char *file)
 {
