@@ -6,58 +6,24 @@
 /*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 20:27:07 by rthammat          #+#    #+#             */
-/*   Updated: 2022/08/15 21:05:59 by rath             ###   ########.fr       */
+/*   Updated: 2022/08/19 16:33:31 by rath             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-/*void	line(t_fdf *fdf)
+/*void	line(t_fdf *dt, float x2, float y2)
 {
-	int	x;
-	int	y;
-	int	dx;
-	int	dy;
-	int	p;
-
-	x = fdf->x1;
-	y = fdf->y1;
-	dx = fdf->x2 - fdf->x1;
-	dy = fdf->y2 - fdf->y1;
-	if (dy < 0)
-		dy *= -1;
-	p = (2 * dy) - dx;
-	while (x <= fdf->x2)
-	{
-		mlx_pixel_put(fdf->mlx_ptr, fdf->win_ptr, x, y, 0xFFFFFF);
-		++x;
-		if (p < 0)
-			p = p + (2 * dy);
-		else
-		{
-			p = p + (2 * dy) - (2 * dx);
-			if (fdf->y1 <= fdf->y2)
-				++y;
-			else
-				--y;
-		}
-	}
-}*/
-
-void	line(t_fdf *dt, int x2, int y2)
-{
-	int	x;
-	int	y;
-	int	dx;
-	int	dy;
-	int	p;
+	float	x;
+	float	y;
+	float	dx;
+	float	dy;
+	float	p;
 
 	x2 *= dt->zm;
 	y2 *= dt->zm;
 	x = (dt->x1) * dt->zm;
 	y = (dt->y1) * dt->zm;
-	//dx = x2 - fdf->x1;
-	//dy = y2 - fdf->y1;
 	dx = x2 - x;
 	dy = y2 - y;
 	if (dy < 0)
@@ -65,8 +31,6 @@ void	line(t_fdf *dt, int x2, int y2)
 	p = (2 * dy) - dx;
 	while (x <= x2 || y != y2)
 	{
-		//if (y2 == (dt->y1 + 1) * dt->zm)
-		//	printf("xxx\n");
 		mlx_pixel_put(dt->mlx_ptr, dt->win_ptr, x, y, 0xFFFFFF);
 		if (x <= x2)
 			++x;
@@ -76,14 +40,123 @@ void	line(t_fdf *dt, int x2, int y2)
 		{
 			p = p + (2 * dy) - (2 * dx);
 			if ((dt->y1 * dt->zm) <= y2 && y != y2)
+			{
+				if (y >= y2 && x > x2)
+					break ;
 				++y;
+			}
 			else if (y != y2)
+			{
+				if (y <= y2 && x > x2)
+					break ;
 				--y;
+			}
+		}
+	}
+}*/
+
+void	x_inc(t_fdf *dt, float x2, float y2)
+{
+	float	x;
+	float	y;
+	float	dx;
+	float	dy;
+	float	p;
+
+	x2 *= dt->zm;
+	y2 *= dt->zm;
+	x = (dt->x1) * dt->zm;
+	y = (dt->y1) * dt->zm;
+	dx = x2 - x;
+	dy = y2 - y;
+	if (dy < 0)
+		dy *= -1;
+	p = (2 * dy) - dx;
+	while (x <= x2 || y != y2)
+	{
+		mlx_pixel_put(dt->mlx_ptr, dt->win_ptr, x, y, 0xFFFFFF);
+		if (x <= x2)
+			++x;
+		if (p < 0)
+			p = p + (2 * dy);
+		else
+		{
+			p = p + (2 * dy) - (2 * dx);
+			if ((dt->y1 * dt->zm) <= y2 && y != y2)
+			{
+				if (y >= y2 && x > x2)
+					break ;
+				++y;
+			}
+			else if (y != y2)
+			{
+				if (y <= y2 && x > x2)
+					break ;
+				--y;
+			}
 		}
 	}
 }
 
-void	set_start(t_fdf *dt, int x, int y)
+void	x_dec(t_fdf *dt, float x2, float y2)
+{
+	float	x;
+	float	y;
+	float	dx;
+	float	dy;
+	float	p;
+
+	x2 *= dt->zm;
+	y2 *= dt->zm;
+	x = (dt->x1) * dt->zm;
+	y = (dt->y1) * dt->zm;
+	dx = x - x2;
+	dy = y - y2;
+	if (dy < 0)
+		dy *= -1;
+	p = (2 * dy) - dx;
+	while (x >= x2 || y != y2)
+	{
+		printf("x %f\n", x);
+		printf("y %f\n", y);
+		mlx_pixel_put(dt->mlx_ptr, dt->win_ptr, x, y, 0xFFFFFF);
+		if (x >= x2)
+			--x;
+		if (p < 0)
+			p = p + (2 * dy);
+		else
+		{
+			p = p + (2 * dy) - (2 * dx);
+			if ((dt->y1 * dt->zm) <= y2 && y != y2)
+			{
+				if (y >= y2 && x < x2)
+					break ;
+				if (y < y2)
+					++y;
+			}
+			else if (y != y2)
+			{
+				if (y <= y2 && x < x2)
+					break ;
+				if (y > y2)
+					--y;
+			}
+		}
+	}
+	printf("dec x %f\n", x);
+	printf("dec y %f\n", y);
+	printf("dec y2 %f\n", y2);
+}
+
+void	line(t_fdf *dt, float x2, float y2)
+{
+	if (dt->x1 < x2)
+		x_inc(dt, x2, y2);
+	else
+		x_dec(dt, x2, y2);
+}
+
+void	set_start(t_fdf *dt, float x, float y)
 {
 	dt->x1 = x;
 	dt->y1 = y;
@@ -91,12 +164,12 @@ void	set_start(t_fdf *dt, int x, int y)
 
 void	draw(t_fdf *dt)
 {
-	int	height;
-	int	width;
-	int	start;
+	float	height;
+	float	width;
+	float	start;
 
 	start = dt->sc_w / (2 * dt->zm) - (dt->width / 2);
-	printf("start %i\n", start);
+	//printf("start %i\n", start);
 	set_start(dt, start, 0);
 	height = dt->height + dt->y1;
 	width = dt->width + dt->x1;

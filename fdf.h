@@ -6,7 +6,7 @@
 /*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 17:05:52 by rthammat          #+#    #+#             */
-/*   Updated: 2022/08/15 21:16:36 by rath             ###   ########.fr       */
+/*   Updated: 2022/08/16 18:31:05 by rath             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ typedef struct f_fdf
 }	t_fdf;
 
 //drawline.c
-void	line(t_fdf *dt, int x2, int y2);
-void	set_start(t_fdf *dt, int x1, int y1);
+void	line(t_fdf *dt, float x2, float y2);
+void	set_start(t_fdf *dt, float x1, float y1);
 void	draw(t_fdf *dt);
 int		get_height(char *file);
 int		get_width(char *file);

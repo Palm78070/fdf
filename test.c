@@ -6,7 +6,7 @@
 /*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 20:17:49 by rthammat          #+#    #+#             */
-/*   Updated: 2022/08/15 21:36:58 by rath             ###   ########.fr       */
+/*   Updated: 2022/08/19 16:35:33 by rath             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,13 @@ int	main(int argc, char **argv)
 		printf("\n");
 		++i;
 	}
-	dt->zm = 20;
-	draw(dt);
-	//set_start(dt, 15, 0);
-	//line(dt, 25, 5);
+	dt->zm = 1;
+	//draw(dt);
+	set_start(dt, 400, 0);
+	line(dt, 800, 400 / sqrt(3));
+	set_start(dt, 400, 0);
+	line(dt, 0, 400 / sqrt(3));
+	//line(dt, 0, 400 / sqrt(3));
 	mlx_loop(dt->mlx_ptr);
 	free_all(dt);
 	return (0);
