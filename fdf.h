@@ -6,7 +6,7 @@
 /*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 17:05:52 by rthammat          #+#    #+#             */
-/*   Updated: 2022/08/16 18:31:05 by rath             ###   ########.fr       */
+/*   Updated: 2022/08/19 21:42:32 by rthammat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ typedef struct f_fdf
 	int		**tab;
 	int		x1;
 	int		y1;
-	int		x2;
-	int		y2;
 	int		height;
 	int		width;
 	int		zm;

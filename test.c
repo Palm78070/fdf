@@ -6,7 +6,7 @@
 /*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 20:17:49 by rthammat          #+#    #+#             */
-/*   Updated: 2022/08/19 16:35:33 by rath             ###   ########.fr       */
+/*   Updated: 2022/08/19 21:42:28 by rthammat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ void	dt_init(t_fdf *dt)
 	dt->tab = NULL;
 	dt->x1 = 0;
 	dt->y1 = 0;
-	dt->x2 = 500;
-	dt->y2 = 500;
 	dt->height = 0;
 	dt->width = 0;
 	dt->zm = 0;
@@ -83,13 +81,24 @@ int	main(int argc, char **argv)
 		printf("\n");
 		++i;
 	}
-	dt->zm = 1;
-	//draw(dt);
-	set_start(dt, 400, 0);
-	line(dt, 800, 400 / sqrt(3));
-	set_start(dt, 400, 0);
-	line(dt, 0, 400 / sqrt(3));
+	dt->zm = 20;
+	draw(dt);
+	//set_start(dt, 400, 0);
+	//line(dt, 800, 400 / sqrt(3));
+	//line(dt, 800, 400 * tan(0.5236));
+	//set_start(dt, 400, 0);
 	//line(dt, 0, 400 / sqrt(3));
+	//line(dt, 0, 400 * tan(0.5236));
+	/*set_start(dt, 0, 0);
+	line(dt, 800, 800);
+	set_start(dt, 800, 0);
+	line(dt, 0, 800);
+	set_start(dt, 400, 0);
+	line(dt, 400, 800);
+	set_start(dt, 800, 400);
+	line(dt, 0, 400);*/
+	//set_start(dt, 400, 0);
+	//line(dt, 100, 30 * tan);
 	mlx_loop(dt->mlx_ptr);
 	free_all(dt);
 	return (0);

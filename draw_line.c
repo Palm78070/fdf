@@ -6,7 +6,7 @@
 /*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 20:27:07 by rthammat          #+#    #+#             */
-/*   Updated: 2022/08/19 16:33:31 by rath             ###   ########.fr       */
+/*   Updated: 2022/08/19 21:42:24 by rthammat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,20 @@
 	}
 }*/
 
+int	check_y_inc(float x, float x2, float y, float y2)
+{
+	if (y >= y2 && x > x2)
+		return (0);
+	return (1);
+}
+
+int	check_y_dec(float x, float x2, float y, float y2)
+{
+	if (y <= y2 && x > x2)
+		return (0);
+	return (1);
+}
+
 void	x_inc(t_fdf *dt, float x2, float y2)
 {
 	float	x;
@@ -82,17 +96,15 @@ void	x_inc(t_fdf *dt, float x2, float y2)
 		else
 		{
 			p = p + (2 * dy) - (2 * dx);
-			if ((dt->y1 * dt->zm) <= y2 && y != y2)
+			if ((dt->y1 * dt->zm) <= y2)
 			{
-				if (y >= y2 && x > x2)
+				if (y++ >= y2 && x > x2)
 					break ;
-				++y;
 			}
-			else if (y != y2)
+			else
 			{
-				if (y <= y2 && x > x2)
+				if (y-- <= y2 && x > x2)
 					break ;
-				--y;
 			}
 		}
 	}
@@ -127,19 +139,15 @@ void	x_dec(t_fdf *dt, float x2, float y2)
 		else
 		{
 			p = p + (2 * dy) - (2 * dx);
-			if ((dt->y1 * dt->zm) <= y2 && y != y2)
+			if ((dt->y1 * dt->zm) <= y2)
 			{
-				if (y >= y2 && x < x2)
+				if (y++ >= y2 && x < x2)
 					break ;
-				if (y < y2)
-					++y;
 			}
-			else if (y != y2)
+			else
 			{
-				if (y <= y2 && x < x2)
+				if (y-- <= y2 && x < x2)
 					break ;
-				if (y > y2)
-					--y;
 			}
 		}
 	}
@@ -180,6 +188,8 @@ void	draw(t_fdf *dt)
 		{
 			line(dt, dt->x1 + 1, dt->y1);
 			line(dt, dt->x1, dt->y1 + 1);
+			//line(dt, dt->x1 + 1, dt->y1 * tan(0.5236));
+			//line(dt, dt->x1 - 1, (dt->y1) * tan(0.5236));
 			dt->x1 += 1;
 		}
 		dt->y1 += 1;
