@@ -6,7 +6,7 @@
 /*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 20:27:07 by rthammat          #+#    #+#             */
-/*   Updated: 2022/08/21 19:45:12 by rthammat         ###   ########.fr       */
+/*   Updated: 2022/08/21 21:04:24 by rthammat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,7 +174,7 @@ void	set_start(t_fdf *dt, float x, float y)
 	dt->y1 = y;
 }
 
-void	draw(t_fdf *dt)
+/*void	draw(t_fdf *dt)
 {
 	float	height;
 	float	width;
@@ -198,9 +198,33 @@ void	draw(t_fdf *dt)
 		}
 		dt->y1 += 1;
 	}
-}
+}*/
 
-////////////
+void	draw(t_fdf *dt, int zm)
+{
+	int	w;
+	int	h;
+	float	x2;
+	float	y2;
+
+	h = -1;
+	x2 = (dt->sc_w / 2) + zm;
+	y2 = 20 * dt->rt;
+	set_start(dt, dt->sc_w / 2, 0);
+	while (++h < dt->height - 1)
+	{
+		w = -1;
+		while (++w < dt->width - 1)
+		{
+			line(dt, dt->x1 - zm, dt->y1 + zm * dt->rt);
+			line(dt, dt->x1 + zm, dt->y1 + zm * dt->rt);
+			set_start(dt, dt->x1 - zm, dt->y1 + zm * dt->rt);
+		}
+		set_start(dt, x2, y2);
+		y2 += (zm * dt->rt);
+		x2 += zm;
+	}
+}
 
 int	get_height(char *file)
 {
