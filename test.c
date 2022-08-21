@@ -6,7 +6,7 @@
 /*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 20:17:49 by rthammat          #+#    #+#             */
-/*   Updated: 2022/08/19 21:42:28 by rthammat         ###   ########.fr       */
+/*   Updated: 2022/08/20 23:09:32 by rath             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,14 @@ void	free_all(t_fdf *dt)
 int	main(int argc, char **argv)
 {
 	t_fdf	*dt;
+	float	r;
 
 	if (argc <= 1)
 	{
 		ft_putstr_fd("No file argument included\n", 2);
 		exit(1);
 	}
+	r = 0.5236;
 	dt = (t_fdf *)malloc(sizeof(t_fdf));
 	if (!dt)
 		exit(1);
@@ -81,8 +83,8 @@ int	main(int argc, char **argv)
 		printf("\n");
 		++i;
 	}
-	dt->zm = 20;
-	draw(dt);
+	dt->zm = 10;
+	//draw(dt);
 	//set_start(dt, 400, 0);
 	//line(dt, 800, 400 / sqrt(3));
 	//line(dt, 800, 400 * tan(0.5236));
@@ -99,6 +101,22 @@ int	main(int argc, char **argv)
 	line(dt, 0, 400);*/
 	//set_start(dt, 400, 0);
 	//line(dt, 100, 30 * tan);
+	set_start(dt, 400, 0);
+	//int w = 0;
+	//int h = 0;
+	dt->height *= dt->zm;
+	dt->width *= dt->zm;
+	//while (h < dt->height)
+	//{
+		//int w2 = 0;
+		//int h2 = 0;
+		//while (++w2 < dt->width)
+		//{
+			line(dt, dt->x1 + 1, dt->y1 + tan(r));
+			line(dt, dt->x1 - 1, dt->y1 + tan(r));
+		//}
+		//++h;
+	//}
 	mlx_loop(dt->mlx_ptr);
 	free_all(dt);
 	return (0);

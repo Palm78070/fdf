@@ -6,7 +6,7 @@
 /*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 20:27:07 by rthammat          #+#    #+#             */
-/*   Updated: 2022/08/19 21:42:24 by rthammat         ###   ########.fr       */
+/*   Updated: 2022/08/20 23:10:40 by rath             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,12 @@ void	x_inc(t_fdf *dt, float x2, float y2)
 	float	dy;
 	float	p;
 
-	x2 *= dt->zm;
-	y2 *= dt->zm;
-	x = (dt->x1) * dt->zm;
-	y = (dt->y1) * dt->zm;
+	//x2 *= dt->zm;
+	//y2 *= dt->zm;
+	//x = (dt->x1) * dt->zm;
+	//y = (dt->y1) * dt->zm;
+	x = (dt->x1);
+	y = (dt->y1);
 	dx = x2 - x;
 	dy = y2 - y;
 	if (dy < 0)
@@ -118,10 +120,12 @@ void	x_dec(t_fdf *dt, float x2, float y2)
 	float	dy;
 	float	p;
 
-	x2 *= dt->zm;
-	y2 *= dt->zm;
-	x = (dt->x1) * dt->zm;
-	y = (dt->y1) * dt->zm;
+	//x2 *= dt->zm;
+	//y2 *= dt->zm;
+	//x = (dt->x1) * dt->zm;
+	//y = (dt->y1) * dt->zm;
+	x = (dt->x1);
+	y = (dt->y1);
 	dx = x - x2;
 	dy = y - y2;
 	if (dy < 0)
@@ -129,8 +133,8 @@ void	x_dec(t_fdf *dt, float x2, float y2)
 	p = (2 * dy) - dx;
 	while (x >= x2 || y != y2)
 	{
-		printf("x %f\n", x);
-		printf("y %f\n", y);
+		//printf("x %f\n", x);
+		//printf("y %f\n", y);
 		mlx_pixel_put(dt->mlx_ptr, dt->win_ptr, x, y, 0xFFFFFF);
 		if (x >= x2)
 			--x;
@@ -151,9 +155,9 @@ void	x_dec(t_fdf *dt, float x2, float y2)
 			}
 		}
 	}
-	printf("dec x %f\n", x);
-	printf("dec y %f\n", y);
-	printf("dec y2 %f\n", y2);
+	//printf("dec x %f\n", x);
+	//printf("dec y %f\n", y);
+	//printf("dec y2 %f\n", y2);
 }
 
 void	line(t_fdf *dt, float x2, float y2)
