@@ -6,7 +6,7 @@
 /*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 20:17:49 by rthammat          #+#    #+#             */
-/*   Updated: 2022/08/20 23:09:32 by rath             ###   ########.fr       */
+/*   Updated: 2022/08/21 19:45:07 by rthammat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	main(int argc, char **argv)
 		printf("\n");
 		++i;
 	}
-	dt->zm = 10;
+	//dt->zm = 20;
 	//draw(dt);
 	//set_start(dt, 400, 0);
 	//line(dt, 800, 400 / sqrt(3));
@@ -99,24 +99,27 @@ int	main(int argc, char **argv)
 	line(dt, 400, 800);
 	set_start(dt, 800, 400);
 	line(dt, 0, 400);*/
-	//set_start(dt, 400, 0);
-	//line(dt, 100, 30 * tan);
+	//int	start = dt->sc_w / (2 * dt->zm) - (dt->width / 2);
 	set_start(dt, 400, 0);
-	//int w = 0;
-	//int h = 0;
-	dt->height *= dt->zm;
-	dt->width *= dt->zm;
-	//while (h < dt->height)
-	//{
-		//int w2 = 0;
-		//int h2 = 0;
-		//while (++w2 < dt->width)
-		//{
-			line(dt, dt->x1 + 1, dt->y1 + tan(r));
-			line(dt, dt->x1 - 1, dt->y1 + tan(r));
-		//}
-		//++h;
-	//}
+	//int width = dt->width + dt->x1;
+	int w = 0;
+	int h = -1;
+	float x2 = 400 + 20;
+	float y2 = 20 * tan(r);
+	while (++h < dt->height - 1)
+	{
+		w = -1;
+		while (++w < dt->width - 1)
+		{
+			line(dt, dt->x1 - 20, dt->y1 + 20 * tan(r));
+			line(dt, dt->x1 + 20, dt->y1 + 20 * tan(r));
+			set_start(dt, dt->x1 - 20, dt->y1 + 20 * tan(r));
+		}
+		set_start(dt, x2, y2);
+		y2 += (20 * tan(r));
+		x2 += 20;
+	}	
+	printf("h %i\n", h);
 	mlx_loop(dt->mlx_ptr);
 	free_all(dt);
 	return (0);
