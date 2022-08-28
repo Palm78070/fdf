@@ -6,7 +6,7 @@
 /*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 20:27:07 by rthammat          #+#    #+#             */
-/*   Updated: 2022/08/21 22:49:04 by rthammat         ###   ########.fr       */
+/*   Updated: 2022/08/28 22:01:26 by rthammat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,32 @@ void	x_inc(t_fdf *dt, float x2, float y2)
 	float	p;
 
 	xy_init(dt, &x, &y);
+	printf("y %f\n", y);
+	printf("y2 %f\n", y2);
+	dt->z1 = dt->tab[(int)y][(int)x / (dt->sc_w / 2)]; /////////iso
+	dt->z2 = dt->tab[(int)y2][(int)x2 / (dt->sc_w / 2)]; /////////iso
+	printf("z1 %f\n", dt->z1);
+	printf("z2 %f\n", dt->z2);
+	printf("y %f\n", y);
+	printf("y2 %f\n", y2);
 	dx = x2 - x;
 	dy = y2 - y;
 	if (dy < 0)
 		dy *= -1;
 	p = (2 * dy) - dx;
+	isomet(&x, &y, dt->z1);
+	isomet(&x2, &y2, dt->z2);
 	while (x <= x2 || y != y2)
 	{
+		sleep(1);
+		/*printf("x2 %f\n", x2);
+		printf("y2 %f\n", x2);
+		printf("x %f\n", x);
+		printf("y %f\n", y);*/
 		mlx_pixel_put(dt->mlx_ptr, dt->win_ptr, x, y, 0xFFFFFF);
 		if (x <= x2)
 			++x;
+		printf("p is %f\n", p);
 		if (p < 0)
 			p = p + (2 * dy);
 		else

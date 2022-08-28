@@ -6,7 +6,7 @@
 /*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 17:05:52 by rthammat          #+#    #+#             */
-/*   Updated: 2022/08/21 22:49:10 by rthammat         ###   ########.fr       */
+/*   Updated: 2022/08/28 22:01:30 by rthammat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,10 @@ typedef struct f_fdf
 	int	sc_h;
 	void	*win_ptr;
 	int		**tab;
-	int		x1;
-	int		y1;
+	float		x1;
+	float		y1;
+	float		z1;
+	float		z2;
 	int		height;
 	int		width;
 	int		zm;
@@ -47,6 +49,8 @@ int		get_height(char *file);
 int		get_width(char *file);
 void	set_start(t_fdf *dt, float x1, float y1);
 void	draw(t_fdf *dt, int zm);
+void	draw2(t_fdf *dt, int zm);
+void	isomet(float *x, float *y, int z);
 //test.c
 void	free_all(t_fdf *dt);
 #endif

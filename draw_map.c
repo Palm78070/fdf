@@ -6,7 +6,7 @@
 /*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 21:37:13 by rthammat          #+#    #+#             */
-/*   Updated: 2022/08/21 22:49:13 by rthammat         ###   ########.fr       */
+/*   Updated: 2022/08/28 22:01:23 by rthammat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	draw(t_fdf *dt, int zm)
 
 	h = -1;
 	x2 = (dt->sc_w / 2) + zm;
-	y2 = 20 * dt->rt;
+	y2 = zm * dt->rt;
 	set_start(dt, dt->sc_w / 2, 0);
 	while (++h < dt->height - 1)
 	{
@@ -99,4 +99,30 @@ void	draw(t_fdf *dt, int zm)
 		y2 += (zm * dt->rt);
 		x2 += zm;
 	}
+}
+
+void	draw2(t_fdf *dt, int zm)
+{
+	int	w;
+	int	h;
+
+	h = -1;
+	set_start(dt, dt->sc_w / 2, 0);
+	while (++h < dt->height - 1)
+	{
+		w = -1;
+		while (++w < dt->width - 1)
+		{
+			line(dt, dt->x1 + zm, dt->y1 * dt->rt);
+			line(dt, dt->x1, dt->y1 + zm * dt->rt);
+			set_start(dt, dt->x1 + zm, dt->y1);
+		}
+		set_start(dt, dt->sc_w / 2, dt->y1 + zm - 1);
+	}
+}
+
+void	isomet(float *x, float *y, int z)
+{
+	*x = (*x - *y) * cos(0.8);
+	*y = (*x + *y) * sin(0.8) - z;
 }

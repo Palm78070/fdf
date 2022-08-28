@@ -6,7 +6,7 @@
 /*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 20:17:49 by rthammat          #+#    #+#             */
-/*   Updated: 2022/08/21 22:49:07 by rthammat         ###   ########.fr       */
+/*   Updated: 2022/08/28 22:01:16 by rthammat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ void	dt_init(t_fdf *dt)
 	dt->height = 0;
 	dt->width = 0;
 	dt->zm = 0;
-	dt->rt = tan(0.5236);
+	//dt->rt = tan(0.5236);
+	dt->rt = 1;
 }
 
 void	free_all(t_fdf *dt)
@@ -68,7 +69,7 @@ int	main(int argc, char **argv)
 		printf("\n");
 		++i;
 	}
-	draw(dt, 20);
+	draw2(dt, 20);
 	mlx_loop(dt->mlx_ptr);
 	free_all(dt);
 	return (0);
