@@ -6,7 +6,7 @@
 /*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 21:37:13 by rthammat          #+#    #+#             */
-/*   Updated: 2022/08/28 22:01:23 by rthammat         ###   ########.fr       */
+/*   Updated: 2022/09/05 20:57:36 by rath             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,20 +101,22 @@ void	draw(t_fdf *dt, int zm)
 	}
 }
 
-void	draw2(t_fdf *dt, int zm)
+void	draw2(t_fdf *dt)
 {
 	int	w;
 	int	h;
+	int	zm;
 
 	h = -1;
+	zm = dt->zm;
 	set_start(dt, dt->sc_w / 2, 0);
 	while (++h < dt->height - 1)
 	{
 		w = -1;
 		while (++w < dt->width - 1)
 		{
-			line(dt, dt->x1 + zm, dt->y1 * dt->rt);
-			line(dt, dt->x1, dt->y1 + zm * dt->rt);
+			line(dt, dt->x1 + zm, dt->y1);
+			line(dt, dt->x1, dt->y1 + zm);
 			set_start(dt, dt->x1 + zm, dt->y1);
 		}
 		set_start(dt, dt->sc_w / 2, dt->y1 + zm - 1);
