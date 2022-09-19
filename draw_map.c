@@ -6,7 +6,7 @@
 /*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 21:37:13 by rthammat          #+#    #+#             */
-/*   Updated: 2022/09/18 00:26:19 by rath             ###   ########.fr       */
+/*   Updated: 2022/09/19 18:14:10 by rath             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,20 +137,32 @@ void	dummy(t_fdf *dt, float x2, float y2)
 		dt->dx *= (-1);
 	if (dt->dy < 0)
 		dt->dy *= (-1);
-	/*printf("x1 %f\n", dt->x1);
-	printf("y1 %f\n", dt->y1);
-	printf("x2 %f\n", x2);
-	printf("y2 %f\n", y2);*/
-	//printf("dx %f\n", dt->dx);
-	//printf("dy %f\n", dt->dy);
-	s = round(dt->dy / dt->dx);
-	//printf("slope %f\n", s);
+	s = dt->dy / dt->dx;
 	x_start = dt->x1;
 	y_start = dt->y1;
-	while (dt->x1 < x2)
+	if (dt->x1 < x2)
 	{
-		line(dt, dt->x1 + 0.1, dt->y1 - s);
-		set_start(dt, dt->x1 + 1, dt->y1 - s);
+		while (dt->x1 < x2)
+		{
+				if (dt->y1 - s <= y2)
+				{
+					line(dt, dt->x1 + 0.1, y2);
+				}
+				else
+					line(dt, dt->x1 + 0.1, dt->y1 - s);
+				set_start(dt, dt->x1 + 1, dt->y1 - s);
+		}
+	}
+	else
+	{
+		while (dt->x1 > x2)
+		{
+			if (dt->y1 - s <= y2)
+				line(dt, dt->x1 - 0.1, y2);
+			else
+				line(dt, dt->x1 - 0.1, dt->y1 - s);
+			set_start(dt, dt->x1 - 1, dt->y1 - s);
+		}
 	}
 	set_start(dt, x_start, y_start);
 }
@@ -163,11 +175,6 @@ void	check_draw(t_fdf *dt, int h, int w)
 	if (dt->tab[h][w] != 0)
 	{
 		set_start(dt, dt->x1, dt->y1 - 190);
-		/*if (h == 2 && w == 11)
-		{
-			line(dt, dt->x1, dt->y1 - 100);
-			//printf("x1 %f y1 %f\n", dt->x1, dt->y1 - 190);
-		}*/
 		if (dt->tab[h][w + 1] != 0)
 			line(dt, dt->x1 + dt->xsc, dt->y1 - dt->ysc);
 		if (dt->tab[h + 1][w] != 0)
@@ -180,21 +187,14 @@ void	check_draw(t_fdf *dt, int h, int w)
 			line(dt, dt->x1 + dt->xsc, dt->y1 + dt->ysc);
 		if (dt->tab[h][w + 1] == 0)
 			line(dt, dt->x1 + dt->xsc, dt->y1 - dt->ysc);
-		/*if (dt->tab[h + 1][w] != 0) ////try
+		if (dt->tab[h + 1][w] != 0) ////try
 			dummy(dt, dt->x1 + dt->xsc, dt->y1 - 180);
 		if (dt->tab[h][w + 1] != 0) ///try
-			dummy(dt, dt->x1 + dt->xsc, dt->y1 - 190);*/
-			//line(dt, dt->x1, dt->y1 - 190);
+			dummy(dt, dt->x1 + dt->xsc, dt->y1 - 200);
 		if (h != 0 && dt->tab[h - 1][w] != 0) ////try
-		{
-			printf("h %d w %d\n", h, w);
-			if (h == 3 && w == 11)
-				dummy(dt, dt->x1 + dt->xsc, dt->y1 - 190);
-			//dummy(dt, dt->x1 + dt->xsc, dt->y1 - 190);
-			//line(dt, dt->x1, dt->y1 - zm - 80);
-		}
-		/*if (w != 0 && dt->tab[h][w - 1] != 0) ///try
-			line(dt, dt->x1, dt->y1 - zm - 80);*/
+			dummy(dt, dt->x1 - dt->xsc, dt->y1 - 200);
+		if (w != 0 && dt->tab[h][w - 1] != 0) ///try
+			dummy(dt, dt->x1 - dt->xsc, dt->y1 - 180);
 	}
 	set_start(dt, dt->x1 + dt->xsc, dt->y1 - dt->ysc);
 }
