@@ -6,7 +6,7 @@
 /*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 21:37:13 by rthammat          #+#    #+#             */
-/*   Updated: 2022/09/19 18:14:10 by rath             ###   ########.fr       */
+/*   Updated: 2022/09/21 20:05:22 by rath             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void	set_start(t_fdf *dt, float x, float y)
 	}
 }*/
 
-void	draw2(t_fdf *dt)
+/*void	draw2(t_fdf *dt)
 {
 	int	w;
 	int	h;
@@ -123,9 +123,9 @@ void	draw2(t_fdf *dt)
 		}
 		set_start(dt, dt->sc_w / 2, dt->y1 + dt->zm - 1);
 	}
-}
+}*/
 
-void	dummy(t_fdf *dt, float x2, float y2)
+void	z_line(t_fdf *dt, float x2, float y2)
 {
 	float	s;
 	float	x_start;
@@ -138,6 +138,8 @@ void	dummy(t_fdf *dt, float x2, float y2)
 	if (dt->dy < 0)
 		dt->dy *= (-1);
 	s = dt->dy / dt->dx;
+	if (dt->z < 0)
+		s *= -1;
 	x_start = dt->x1;
 	y_start = dt->y1;
 	if (dt->x1 < x2)
@@ -145,9 +147,7 @@ void	dummy(t_fdf *dt, float x2, float y2)
 		while (dt->x1 < x2)
 		{
 				if (dt->y1 - s <= y2)
-				{
 					line(dt, dt->x1 + 0.1, y2);
-				}
 				else
 					line(dt, dt->x1 + 0.1, dt->y1 - s);
 				set_start(dt, dt->x1 + 1, dt->y1 - s);
@@ -157,7 +157,9 @@ void	dummy(t_fdf *dt, float x2, float y2)
 	{
 		while (dt->x1 > x2)
 		{
-			if (dt->y1 - s <= y2)
+			if (dt->z >= 0 && dt->y1 - s <= y2)
+				line(dt, dt->x1 - 0.1, y2);
+			else if (dt->z < 0 && dt->y1 - s >= y2)
 				line(dt, dt->x1 - 0.1, y2);
 			else
 				line(dt, dt->x1 - 0.1, dt->y1 - s);
@@ -169,17 +171,15 @@ void	dummy(t_fdf *dt, float x2, float y2)
 
 void	check_draw(t_fdf *dt, int h, int w)
 {
-	int	zm;
-
-	zm = dt->zm;
 	if (dt->tab[h][w] != 0)
 	{
-		set_start(dt, dt->x1, dt->y1 - 190);
+		dt->z = (dt->tab[h][w] / 10) * 190;
+		set_start(dt, dt->x1, dt->y1 - dt->z);
 		if (dt->tab[h][w + 1] != 0)
 			line(dt, dt->x1 + dt->xsc, dt->y1 - dt->ysc);
 		if (dt->tab[h + 1][w] != 0)
 			line(dt, dt->x1 + dt->xsc, dt->y1 + dt->ysc);
-		set_start(dt, dt->x1, dt->y1 + 190);
+		set_start(dt, dt->x1, dt->y1 + dt->z);
 	}
 	if (dt->tab[h][w] == 0)
 	{
@@ -187,14 +187,29 @@ void	check_draw(t_fdf *dt, int h, int w)
 			line(dt, dt->x1 + dt->xsc, dt->y1 + dt->ysc);
 		if (dt->tab[h][w + 1] == 0)
 			line(dt, dt->x1 + dt->xsc, dt->y1 - dt->ysc);
-		if (dt->tab[h + 1][w] != 0) ////try
-			dummy(dt, dt->x1 + dt->xsc, dt->y1 - 180);
-		if (dt->tab[h][w + 1] != 0) ///try
-			dummy(dt, dt->x1 + dt->xsc, dt->y1 - 200);
-		if (h != 0 && dt->tab[h - 1][w] != 0) ////try
-			dummy(dt, dt->x1 - dt->xsc, dt->y1 - 200);
+		if (dt->tab[h + 1][w] != 0)
+		{
+			dt->z = (dt->tab[h + 1][w] / 10) * 190 - 10;
+			if (dt->z < 0 && (h == 1 && w == 2))
+				z_line(dt, dt->x1 - dt->xsc, dt->y1 - dt->z);
+			else
+				z_line(dt, dt->x1 + dt->xsc, dt->y1 - dt->z);
+		}
+		/*if (dt->tab[h][w + 1] != 0)
+		{
+			dt->z = (dt->tab[h][w + 1] / 10) * (190 + 10);
+			z_line(dt, dt->x1 + dt->xsc, dt->y1 - dt->z);
+		}
+		if (h != 0 && dt->tab[h - 1][w] != 0)
+		{
+			dt->z = (dt->tab[h - 1][w] / 10) * (190 + 10);
+			z_line(dt, dt->x1 - dt->xsc, dt->y1 - dt->z);
+		}
 		if (w != 0 && dt->tab[h][w - 1] != 0) ///try
-			dummy(dt, dt->x1 - dt->xsc, dt->y1 - 180);
+		{
+			dt->z = (dt->tab[h][w - 1] / 10) * (190 - 10);
+			z_line(dt, dt->x1 - dt->xsc, dt->y1 - dt->z);
+		}*/
 	}
 	set_start(dt, dt->x1 + dt->xsc, dt->y1 - dt->ysc);
 }

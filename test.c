@@ -6,7 +6,7 @@
 /*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 20:17:49 by rthammat          #+#    #+#             */
-/*   Updated: 2022/09/17 23:37:14 by rath             ###   ########.fr       */
+/*   Updated: 2022/09/19 19:31:07 by rath             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	dt_init(t_fdf *dt)
 	dt->tab = NULL;
 	dt->x1 = 0;
 	dt->y1 = 0;
+	dt->z = 0;
 	dt->dx = 0;
 	dt->dy = 0;
 	dt->height = 0;
@@ -71,26 +72,7 @@ int	main(int argc, char **argv)
 		printf("\n");
 		++i;
 	}
-	//draw2(dt);
-	/*set_start(dt, dt->sc_w / 2, 400);
-	float x_sc = dt->zm * cos(0.5236);
-	float y_sc = dt->zm * sin(0.5236);
-	line(dt, dt->x1 + x_sc, dt->y1 + y_sc);
-	set_start(dt, dt->sc_w / 2, 400);
-	line(dt, dt->x1 + x_sc, dt->y1 - y_sc);*/
 	draw4(dt);
-	/*set_start(dt, 211.961487, 489.999969);
-	while (dt->x1 < 229.281982)
-	{
-		line(dt, dt->x1 + 0.1, dt->y1 - 10);
-		set_start(dt, dt->x1 + 1, dt->y1 - 10);
-	}*/
-	/*set_start(dt, 211.961487, 510.000031);
-	while (dt->x1 < 229.281982)
-	{
-		line(dt, dt->x1 + 0.1, dt->y1 - 11);
-		set_start(dt, dt->x1 + 1, dt->y1 - 11);
-	}*/
 	mlx_loop(dt->mlx_ptr);
 	free_all(dt);
 	return (0);
