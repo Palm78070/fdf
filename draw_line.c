@@ -6,21 +6,11 @@
 /*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 20:27:07 by rthammat          #+#    #+#             */
-/*   Updated: 2022/09/17 22:19:50 by rath             ###   ########.fr       */
+/*   Updated: 2022/09/21 20:14:40 by rath             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-/*float	d_init(t_fdf *dt, float x2, float y2)
-{
-	float	res;
-
-	if (c == 'x')
-		res = x2 - dt->x1;
-	else
-		res = y2 - dt->y1;
-}*/
 
 static void	xy_init(t_fdf *dt, float *x, float *y)
 {

@@ -6,7 +6,7 @@
 /*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 17:05:52 by rthammat          #+#    #+#             */
-/*   Updated: 2022/09/19 19:30:50 by rath             ###   ########.fr       */
+/*   Updated: 2022/09/21 23:27:25 by rath             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,10 @@ int		get_height(char *file);
 int		get_width(char *file);
 void	set_start(t_fdf *dt, float x1, float y1);
 //void	draw(t_fdf *dt, int zm);
-void	draw2(t_fdf *dt);
-//void	draw3(t_fdf *dt, int zm);
 void	draw4(t_fdf *dt);
-void	isomet(t_fdf *dt, float *x, float *y, int z);
 //test.c
 void	free_all(t_fdf *dt);
+//z_axis.c
+//void	z_line(t_fdf *dt, float x2, float y2);
+void    z_spot(t_fdf *dt, int h, int w);
 #endif

@@ -10,6 +10,7 @@ SRCS = draw_line.c \
        table.c \
        draw_map.c \
        test.c \
+       z_axis.c \
 
 all: $(NAME)
 
