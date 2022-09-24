@@ -6,7 +6,7 @@
 /*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 21:37:13 by rthammat          #+#    #+#             */
-/*   Updated: 2022/09/21 23:13:24 by rath             ###   ########.fr       */
+/*   Updated: 2022/09/24 17:31:36 by rath             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,9 @@ void	check_draw(t_fdf *dt, int h, int w)
 {
 	if (dt->tab[h][w] != 0)
 	{
-		dt->z = (dt->tab[h][w] / 10) * 190;
+		dt->z = (dt->tab[h][w]) * (190 / 10);
+		//if (dt->tab[h][w] < 0)
+		//	dt->z *= (-1);
 		set_start(dt, dt->x1, dt->y1 - dt->z);
 		if (dt->tab[h][w + 1] != 0)
 			line(dt, dt->x1 + dt->xsc, dt->y1 - dt->ysc);
@@ -97,6 +99,35 @@ void	check_draw(t_fdf *dt, int h, int w)
 	}
 	set_start(dt, dt->x1 + dt->xsc, dt->y1 - dt->ysc);
 }
+
+/*void	check_draw(t_fdf *dt, int h, int w)
+{
+	float	z0;
+	//if (dt->tab[h][w] != 0)
+	//{
+		if (w == 0)
+			z0 = dt->tab[h][w];
+		dt->z = (abs(abs(dt->tab[h][w]) - fabsf(z0))) * 190;
+		if (dt->tab[h][w] < 0)
+			dt->z *= (-1);
+		printf("z %f\n", dt->z);
+		set_start(dt, dt->x1, dt->y1 - dt->z);
+		//if (dt->tab[h][w + 1] != 0)
+			line(dt, dt->x1 + dt->xsc, dt->y1 - dt->ysc);
+		//if (dt->tab[h + 1][w] != 0)
+			line(dt, dt->x1 + dt->xsc, dt->y1 + dt->ysc);
+		set_start(dt, dt->x1, dt->y1 + dt->z);
+	//}
+	if (dt->tab[h][w] == 0)
+	{
+		if (dt->tab[h + 1][w] == 0)
+			line(dt, dt->x1 + dt->xsc, dt->y1 + dt->ysc);
+		if (dt->tab[h][w + 1] == 0)
+			line(dt, dt->x1 + dt->xsc, dt->y1 - dt->ysc);
+		z_spot(dt, h, w);
+	}
+	set_start(dt, dt->x1 + dt->xsc, dt->y1 - dt->ysc);
+}*/
 
 void	draw4(t_fdf *dt)
 {
