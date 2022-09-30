@@ -6,7 +6,7 @@
 /*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 20:27:07 by rthammat          #+#    #+#             */
-/*   Updated: 2022/09/21 20:14:40 by rath             ###   ########.fr       */
+/*   Updated: 2022/09/28 17:44:59 by rath             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,12 @@ void	x_inc(t_fdf *dt, float x2, float y2)
 	float	p;
 
 	xy_init(dt, &x, &y);
-	dt->dx = x2 - x;
-	dt->dy = y2 - y;
-	if (dt->dy < 0)
-		dt->dy *= -1;
+	dt->dx = fabs(x2 - x);
+	dt->dy = fabs(y2 - y);
+	//if (dt->dy < 0)
+	//	dt->dy *= -1;
+	//printf("dy %f\n", dt->dy);
+	//printf("dx %f\n", dt->dx);
 	p = (2 * dt->dy) - dt->dx;
 	while (x <= x2 || y != y2)
 	{
@@ -50,6 +52,33 @@ void	x_inc(t_fdf *dt, float x2, float y2)
 		}
 	}
 }
+
+/*void	x_inc(t_fdf *dt, float x2, float y2)
+{
+	float	x;
+	float	y;
+	float	p;
+
+	xy_init(dt, &x, &y);
+	dt->dx = x2 - x;
+	dt->dy = y2 - y;
+	p = 2 * dt->dy - dt->dx;
+	while (x < x2)
+	{
+		if (p >= 0)
+		{
+			mlx_pixel_put(dt->mlx_ptr, dt->win_ptr, x, y, 0xFFFFFF);
+			++y;
+			p = p + 2 * dt->dy - 2 * dt->dx;
+		}
+		else
+		{
+			mlx_pixel_put(dt->mlx_ptr, dt->win_ptr, x, y, 0xFFFFFF);
+			p = p + 2 * dt->dy;
+			x += 1;
+		}
+	}
+}*/
 
 void	x_dec(t_fdf *dt, float x2, float y2)
 {

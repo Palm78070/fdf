@@ -6,7 +6,7 @@
 /*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 20:17:49 by rthammat          #+#    #+#             */
-/*   Updated: 2022/09/23 22:29:10 by rath             ###   ########.fr       */
+/*   Updated: 2022/09/30 20:28:46 by rath             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	dt_init(t_fdf *dt)
 	dt->x1 = 0;
 	dt->y1 = 0;
 	dt->z = 0;
+	dt->zx = 0;
+	dt->zy = 0;
 	dt->dx = 0;
 	dt->dy = 0;
 	dt->height = 0;
@@ -73,6 +75,16 @@ int	main(int argc, char **argv)
 		++i;
 	}
 	draw4(dt);
+	/*set_start(dt, 400, 0);
+	line(dt, 400, 109.999634);
+	set_start(dt, 400, 109.999634);
+	line(dt, 800, 109.999634);*/
+	/*set_start(dt, 400, 400);
+	z_line(dt, 800, 400);
+	line(dt, 400, 800);
+	//line(dt, 500, 510);
+	//line(dt, 300, 290);
+	z_line(dt, 500, 510);*/
 	mlx_loop(dt->mlx_ptr);
 	free_all(dt);
 	return (0);

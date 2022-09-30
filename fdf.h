@@ -6,7 +6,7 @@
 /*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 17:05:52 by rthammat          #+#    #+#             */
-/*   Updated: 2022/09/21 23:27:25 by rath             ###   ########.fr       */
+/*   Updated: 2022/09/26 19:39:35 by rath             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ typedef struct f_fdf
 	float		x1;
 	float		y1;
 	float		z;
+	float		zx;
+	float		zy;
 	float		dx;
 	float		dy;
 	int		height;
@@ -55,6 +57,6 @@ void	draw4(t_fdf *dt);
 //test.c
 void	free_all(t_fdf *dt);
 //z_axis.c
-//void	z_line(t_fdf *dt, float x2, float y2);
+void	z_line(t_fdf *dt, float x2, float y2);
 void    z_spot(t_fdf *dt, int h, int w);
 #endif
