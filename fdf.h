@@ -6,7 +6,7 @@
 /*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 17:05:52 by rthammat          #+#    #+#             */
-/*   Updated: 2022/09/26 19:39:35 by rath             ###   ########.fr       */
+/*   Updated: 2022/10/04 21:13:00 by rath             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct f_fdf
 	float		dy;
 	int		height;
 	int		width;
-	int		zm;
+	float		zm;
 	float		xsc;
 	float		ysc;
 }	t_fdf;
@@ -48,15 +48,14 @@ void	line(t_fdf *dt, float x2, float y2);
 void	free_tab(t_fdf *dt);
 int		**create_tab(t_fdf *dt);
 void	fill_tab(t_fdf *dt, char *file);
-//draw_map
+//map_uti.c
 int		get_height(char *file);
 int		get_width(char *file);
 void	set_start(t_fdf *dt, float x1, float y1);
-//void	draw(t_fdf *dt, int zm);
+//draw_map
 void	draw4(t_fdf *dt);
 //test.c
 void	free_all(t_fdf *dt);
 //z_axis.c
 void	z_line(t_fdf *dt, float x2, float y2);
-void    z_spot(t_fdf *dt, int h, int w);
 #endif

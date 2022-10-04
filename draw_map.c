@@ -6,74 +6,11 @@
 /*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 21:37:13 by rthammat          #+#    #+#             */
-/*   Updated: 2022/09/30 20:29:23 by rath             ###   ########.fr       */
+/*   Updated: 2022/10/04 21:18:09 by rath             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-int	get_height(char *file)
-{
-	int	fd;
-	int	count;
-	char	*s;
-
-	fd = open(file, O_RDONLY);
-	count = 0;
-	if (fd < 0)
-	{
-		perror("error");
-		return (-1);
-	}
-	s = get_next_line(fd);
-	while (s != NULL)
-	{
-		++count;
-		free(s);
-		s = get_next_line(fd);
-	}
-	free(s);
-	if (close(fd) == -1)
-		perror("error");
-	return (count);
-}
-
-int	get_width(char *file)
-{
-	int	fd;
-	int	count;
-	char	*s;
-	char	**s2;
-
-	fd = open(file, O_RDONLY);
-	count = 0;
-	if (fd < 0)
-	{
-		perror("error");
-		return (-1);
-	}
-	s = get_next_line(fd);
-	if (s != NULL)
-	{
-		int i = -1;
-		s2 = ft_split(s, ' ');
-		while (s2[++i])
-			++count;
-		free_double(s2);
-	}
-	while (s != NULL)
-		s = get_next_line(fd);
-	free(s);
-	if (close(fd) == -1)
-		perror("error");
-	return (count);
-}
-
-void	set_start(t_fdf *dt, float x, float y)
-{
-	dt->x1 = x;
-	dt->y1 = y;
-}
 
 /*void	check_draw(t_fdf *dt, int h, int w)
 {
@@ -180,6 +117,9 @@ void	close_w(t_fdf *dt)
 	set_start(dt, dt->x1 + dt->xsc, dt->y1 + dt->ysc);
 	y2 = dt->y1;
 	set_start(dt, dt->x1, dt->y1 - dt->z);
+	/////////////////////////////////
+	//printf("x %f y %f\n", dt->x1 + dt->xsc, dt->y1);
+	/////////////////////////////////
 	if (!slope1(dt, dt->x1 + dt->xsc, y2 - dt->ysc - dt->zx))
 		z_line(dt, dt->x1 + dt->xsc, y2 - dt->ysc - dt->zx);
 	else
@@ -232,6 +172,30 @@ void	check_draw(t_fdf *dt, int h, int w)
 	set_start(dt, dt->x1 + dt->xsc, dt->y1 + dt->z - dt->ysc);
 }
 
+static void	check_x(t_fdf *dt, int w, int h, float x2)
+{
+	while (++h < dt->height - 1)
+		x2 += dt->xsc;
+	while (++w < dt->width - 1)
+		x2 += dt->xsc;
+	//printf("x_end %f\n", x2);	
+}
+
+static void	check_y(t_fdf *dt, float y2)
+{
+	int	h;
+
+	h = -1;
+	while (++h < dt->height - 1)
+	{
+		//printf("h %i\n", h);
+		//y2 = y2 + dt->ysc;
+		y2 = y2 - dt->tab[h][0] + dt->ysc;
+	}
+	//y2 = y2 - dt->tab[h][0] + dt->ysc;
+	//printf("y_end %f\n", y2);
+}
+
 void	draw4(t_fdf *dt)
 {
 	int	w;
@@ -242,6 +206,10 @@ void	draw4(t_fdf *dt)
 	h = -1;
 	x2 = (dt->sc_w / 5);
 	y2 = dt->sc_h / 2 + 100;
+	////////////////////////
+	check_x(dt, -1, -1, x2);
+	check_y(dt, y2);
+	////////////////////////
 	set_start(dt, dt->sc_w / 5, dt->sc_h / 2 + 100);
 	while (++h < dt->height - 1)
 	{

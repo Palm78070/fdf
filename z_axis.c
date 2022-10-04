@@ -1,30 +1,9 @@
 #include "fdf.h"
 
-/*void	move(t_fdf *dt, float y2, float s, float mv)
+static void	move(t_fdf *dt, float y2, float s, float mv)
 {
-	if (dt->z < 0)
-		s *= (-1);
-	//////////////////
 	if (dt->y1 < y2)
 		s *= (-1);
-	//////////////////
-	if (dt->z >= 0 && dt->y1 - s <= y2)
-		line(dt, dt->x1 + mv, y2);
-	else if (dt->z < 0 && dt->y1 - s >= y2)
-		line(dt, dt->x1 + mv, y2);
-	else
-		line(dt, dt->x1 + mv, dt->y1 - s);
-	set_start(dt, dt->x1 + (mv * 10), dt->y1 - s);
-}*/
-
-void	move(t_fdf *dt, float y2, float s, float mv)
-{
-	//if (dt->z < 0)
-	//	s *= (-1);
-	//////////////////
-	if (dt->y1 < y2)
-		s *= (-1);
-	//////////////////
 	if (s > 0 && dt->y1 - s <= y2)
 		line(dt, dt->x1 + mv, y2);
 	else if (s < 0 && dt->y1 - s >= y2)
@@ -34,7 +13,7 @@ void	move(t_fdf *dt, float y2, float s, float mv)
 	set_start(dt, dt->x1 + (mv * 10), dt->y1 - s);
 }
 
-void	z_up(t_fdf *dt, float x2, float y2)
+static void	z_up(t_fdf *dt, float x2, float y2)
 {
 	float	s;
 	float	x_start;
@@ -62,7 +41,7 @@ void	z_up(t_fdf *dt, float x2, float y2)
 	set_start(dt, x_start, y_start);
 }
 
-void	z_down(t_fdf *dt, float x2, float y2)
+static void	z_down(t_fdf *dt, float x2, float y2)
 {
 	float	s;
 	float	x_start;
@@ -96,46 +75,4 @@ void	z_line(t_fdf *dt, float x2, float y2)
 		z_down(dt, x2, y2);
 	else
 		z_up(dt, x2, y2);
-}
-
-void	z_spot(t_fdf *dt, int h, int w)
-{
-	int	xsc;
-
-	xsc = dt->xsc;
-	if (dt->tab[h + 1][w] != 0)
-	{
-		dt->z = (dt->tab[h + 1][w]) * (dt->zm) - 10;
-		//if (dt->tab[h + 1][w] < 0)
-		//	dt->z *= (-1);
-		//dt->z -= 10;
-		z_line(dt, dt->x1 + xsc, dt->y1 - dt->z);
-	}
-	if (dt->tab[h][w + 1] != 0)
-	{
-		dt->z = (dt->tab[h][w + 1]) * (dt->zm) + 10;
-		//dt->z = abs((10 - abs(dt->tab[h][w + 1]))) + 190;
-		//if (dt->tab[h][w + 1] < 0)
-		//	dt->z *= (-1);
-		//dt->z += 10;
-		z_line(dt, dt->x1 + xsc, dt->y1 - dt->z);
-	}
-	if (h != 0 && dt->tab[h - 1][w] != 0)
-	{
-		dt->z = (dt->tab[h - 1][w]) * (dt->zm) + 10;
-		//dt->z = abs((10 - abs(dt->tab[h - 1][w]))) + 190;
-		//if (dt->tab[h - 1][w] < 0)
-		//	dt->z *= (-1);
-		//dt->z += 10;
-		z_line(dt, dt->x1 - xsc, dt->y1 - dt->z);
-	}
-	if (w != 0 && dt->tab[h][w - 1] != 0)
-	{
-		dt->z = (dt->tab[h][w - 1]) * (dt->zm) - 10;
-		//dt->z = abs((10 - abs(dt->tab[h][w - 1]))) + 190;
-		//if (dt->tab[h][w - 1] < 0)
-		//	dt->z *= (-1);
-		//dt->z -= 10;
-		z_line(dt, dt->x1 - xsc, dt->y1 - dt->z);
-	}
 }
