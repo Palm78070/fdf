@@ -6,7 +6,7 @@
 /*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 20:27:07 by rthammat          #+#    #+#             */
-/*   Updated: 2022/10/04 23:01:49 by rath             ###   ########.fr       */
+/*   Updated: 2022/10/07 20:17:07 by rath             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	x_inc(t_fdf *dt, float x2, float y2)
 	xy_init(dt, &x, &y, &p);
 	while (x <= x2 || y != y2)
 	{
-		mlx_pixel_put(dt->mlx_ptr, dt->win_ptr, x, y, 0xFFFFFF);
+		mlx_pixel_put(dt->mlx_ptr, dt->win_ptr, x, y, dt->c);
 		check_x(&x, x2, '<');
 		if (p < 0)
 			p = p + (2 * dt->dy);
@@ -70,7 +70,7 @@ static void	x_dec(t_fdf *dt, float x2, float y2)
 	xy_init(dt, &x, &y, &p);
 	while (x >= x2 || y != y2)
 	{
-		mlx_pixel_put(dt->mlx_ptr, dt->win_ptr, x, y, 0xFFFFFF);
+		mlx_pixel_put(dt->mlx_ptr, dt->win_ptr, x, y, dt->c);
 		check_x(&x, x2, '>');
 		if (p < 0)
 			p = p + (2 * dt->dy);

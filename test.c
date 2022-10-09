@@ -6,7 +6,7 @@
 /*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 20:17:49 by rthammat          #+#    #+#             */
-/*   Updated: 2022/10/04 21:54:16 by rath             ###   ########.fr       */
+/*   Updated: 2022/10/09 01:02:24 by rath             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	dt_init(t_fdf *dt)
 	dt->sc_h = 800;
 	dt->win_ptr = mlx_new_window(dt->mlx_ptr, dt->sc_w, dt->sc_h, "fdf");
 	dt->tab = NULL;
+	dt->color = NULL;
+	dt->c = 0;
 	dt->x1 = 0;
 	dt->y1 = 0;
 	dt->z = 0;
@@ -36,8 +38,17 @@ void	dt_init(t_fdf *dt)
 void	free_all(t_fdf *dt)
 {
 	if (dt->tab)
-		free_tab(dt);
+		free_tab(dt, dt->tab);
+	if (dt->color)
+		free_tab(dt, dt->color);
 	free(dt);
+}
+
+void	send_err(t_fdf *dt)
+{
+	perror("error");
+	free_all(dt);
+	exit(1);
 }
 
 int	main(int argc, char **argv)
@@ -63,6 +74,7 @@ int	main(int argc, char **argv)
 		exit(-1);
 	}
 	dt->tab = create_tab(dt);
+	dt->color = create_tab(dt);
 	int i = 0;
 	fill_tab(dt, argv[1]);
 	i = 0;
@@ -75,6 +87,18 @@ int	main(int argc, char **argv)
 		++i;
 	}
 	draw4(dt);
+	/*i = 0;
+	printf("\n");
+	while (i < dt->height)
+	{
+		int j = -1;
+		while (++j < dt->width)
+			printf("%7x", dt->color[i][j]);
+		printf("\n");
+		++i;
+	}*/
+	//int hex = 0xFFFF00;
+	//printf("color %x\n", hex);
 	/*set_start(dt, 400, 0);
 	line(dt, 400, 109.999634);
 	set_start(dt, 400, 109.999634);

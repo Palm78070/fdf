@@ -6,7 +6,7 @@
 /*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 21:37:13 by rthammat          #+#    #+#             */
-/*   Updated: 2022/10/04 21:18:09 by rath             ###   ########.fr       */
+/*   Updated: 2022/10/09 23:45:17 by rath             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ int	slope1(t_fdf *dt, float x2, float y2)
 	set_start(dt, dt->x1 + dt->xsc, dt->y1 - dt->ysc - dt->zx);
 }*/
 
-void	close_w(t_fdf *dt)
+/*void	close_w(t_fdf *dt)
 {
 	float	y2;
 
@@ -141,44 +141,44 @@ void	close_h(t_fdf *dt, float y2)
 	else
 		line(dt, dt->x1 + dt->xsc, end_point - offset);
 	set_start(dt, dt->x1 - dt->xsc, y2 + dt->ysc + dt->zx);
-}
+}*/
 
 void	check_draw(t_fdf *dt, int h, int w)
 {
 	float	y2;
 
 	dt->z = dt->tab[h][w] * dt->zm;
+	dt->c = dt->color[h][w];
 	if (w + 1 <= dt->width - 1)
 		dt->zx = dt->tab[h][w + 1] * dt->zm;
 	if (h + 1 <= dt->height - 1)
 		dt->zy = dt->tab[h + 1][w] * dt->zm;
 	y2 = dt->y1;
-	if (h == dt->height - 2)
-		close_w(dt);
+	//if (h == dt->height - 2)
+	//	close_w(dt);
 	//////// h w ////////////////////////////
 	set_start(dt, dt->x1, dt->y1 - dt->z);
 	/////// h w+1 ///////////////////////////
-	if (!slope1(dt, dt->x1 + dt->xsc, y2 - dt->ysc - dt->zx))
+	if ((w < dt->width - 1) && !slope1(dt, dt->x1 + dt->xsc, y2 - dt->ysc - dt->zx))
 		z_line(dt, dt->x1 + dt->xsc, y2 - dt->ysc - dt->zx);
-	else
+	else if (w < dt->width - 1)
 		line(dt, dt->x1 + dt->xsc, y2 - dt->ysc - dt->zx);
 	/////// h+1 w ///////////////////////////
-	if (!slope1(dt, dt->x1 + dt->xsc, y2 + dt->ysc - dt->zy))
+	if ((h < dt->height - 1) && !slope1(dt, dt->x1 + dt->xsc, y2 + dt->ysc - dt->zy))
 		z_line(dt, dt->x1 + dt->xsc, y2 + dt->ysc - dt->zy);
-	else
+	else if (h < dt->height - 1)
 		line(dt, dt->x1 + dt->xsc, y2 + dt->ysc - dt->zy);
-	if (w == dt->width - 2)
-		close_h(dt, y2);
+	//if (w == dt->width - 2)
+	//	close_h(dt, y2);
 	set_start(dt, dt->x1 + dt->xsc, dt->y1 + dt->z - dt->ysc);
 }
 
-static void	check_x(t_fdf *dt, int w, int h, float x2)
+/*static void	check_x(t_fdf *dt, int w, int h, float x2)
 {
 	while (++h < dt->height - 1)
 		x2 += dt->xsc;
 	while (++w < dt->width - 1)
 		x2 += dt->xsc;
-	//printf("x_end %f\n", x2);	
 }
 
 static void	check_y(t_fdf *dt, float y2)
@@ -187,14 +187,8 @@ static void	check_y(t_fdf *dt, float y2)
 
 	h = -1;
 	while (++h < dt->height - 1)
-	{
-		//printf("h %i\n", h);
-		//y2 = y2 + dt->ysc;
 		y2 = y2 - dt->tab[h][0] + dt->ysc;
-	}
-	//y2 = y2 - dt->tab[h][0] + dt->ysc;
-	//printf("y_end %f\n", y2);
-}
+}*/
 
 void	draw4(t_fdf *dt)
 {
@@ -207,14 +201,16 @@ void	draw4(t_fdf *dt)
 	x2 = (dt->sc_w / 5);
 	y2 = dt->sc_h / 2 + 100;
 	////////////////////////
-	check_x(dt, -1, -1, x2);
-	check_y(dt, y2);
+	//check_x(dt, -1, -1, x2);
+	//check_y(dt, y2);
 	////////////////////////
 	set_start(dt, dt->sc_w / 5, dt->sc_h / 2 + 100);
-	while (++h < dt->height - 1)
+	//while (++h < dt->height - 1)
+	while (++h < dt->height)
 	{
 		w = -1;
-		while (++w < dt->width - 1)
+		//while (++w < dt->width - 1)
+		while (++w < dt->width)
 			check_draw(dt, h, w);
 		y2 += dt->ysc;
 		x2 += dt->xsc;

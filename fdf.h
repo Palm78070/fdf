@@ -6,7 +6,7 @@
 /*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 17:05:52 by rthammat          #+#    #+#             */
-/*   Updated: 2022/10/04 21:13:00 by rath             ###   ########.fr       */
+/*   Updated: 2022/10/08 14:57:58 by rath             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ typedef struct f_fdf
 	int	sc_h;
 	void	*win_ptr;
 	int		**tab;
+	int		**color;
+	int		c;
 	float		x1;
 	float		y1;
 	float		z;
@@ -45,7 +47,7 @@ typedef struct f_fdf
 //drawline.c
 void	line(t_fdf *dt, float x2, float y2);
 //table.c
-void	free_tab(t_fdf *dt);
+void	free_tab(t_fdf *dt, int **arr);
 int		**create_tab(t_fdf *dt);
 void	fill_tab(t_fdf *dt, char *file);
 //map_uti.c
@@ -56,6 +58,11 @@ void	set_start(t_fdf *dt, float x1, float y1);
 void	draw4(t_fdf *dt);
 //test.c
 void	free_all(t_fdf *dt);
+void	send_err(t_fdf *dt);
 //z_axis.c
 void	z_line(t_fdf *dt, float x2, float y2);
+//color.c
+int	convert_hex(char *s);
+int	found_c(char *str, char c);
+void	fill_color(t_fdf *dt, char *s, int h, int w);
 #endif

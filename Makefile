@@ -12,6 +12,7 @@ SRCS = draw_line.c \
        draw_map.c \
        test.c \
        z_axis.c \
+       color.c \
 
 all: $(NAME)
 
