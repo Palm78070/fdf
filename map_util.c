@@ -20,7 +20,6 @@ int	get_height(char *file)
 		free(s);
 		s = get_next_line(fd);
 	}
-	free(s);
 	if (close(fd) == -1)
 		perror("error");
 	return (count);
@@ -43,18 +42,25 @@ int	get_width(char *file)
 	s = get_next_line(fd);
 	if (s != NULL)
 	{
-		int i = -1;
 		s2 = ft_split(s, ' ');
-		while (s2[++i])
+		while (s2[count])
 			++count;
 		free_double(s2);
 	}
 	while (s != NULL)
+	{
+		free(s);
 		s = get_next_line(fd);
-	free(s);
+	}
 	if (close(fd) == -1)
 		perror("error");
 	return (count);
+}
+
+void	get_map_size(t_fdf *dt, char *input)
+{
+	dt->height = get_height(input);
+	dt->width = get_width(input);
 }
 
 void	set_start(t_fdf *dt, float x, float y)

@@ -6,7 +6,7 @@
 /*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 22:47:54 by rthammat          #+#    #+#             */
-/*   Updated: 2022/08/04 16:35:07 by rthammat         ###   ########.fr       */
+/*   Updated: 2022/10/10 21:07:32 by rath             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,12 @@ void	free_double(char **s)
 
 	i = -1;
 	while (s[++i] != NULL)
+	{
 		free(s[i]);
+		s[i] = NULL;
+	}
 	free(s[i]);
+	s[i] = NULL;
 	free(s);
 	s = NULL;
 }
