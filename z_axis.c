@@ -19,12 +19,8 @@ static void	z_up(t_fdf *dt, float x2, float y2)
 	float	x_start;
 	float	y_start;
 
-	dt->dx = x2 - dt->x1;
-	dt->dy = y2 - dt->y1;
-	if (dt->dx < 0)
-		dt->dx *= (-1);
-	if (dt->dy < 0)
-		dt->dy *= (-1);
+	dt->dx = fabsf(x2 - dt->x1);
+	dt->dy = fabsf(y2 - dt->y1);
 	s = dt->dy / dt->dx;
 	x_start = dt->x1;
 	y_start = dt->y1;
@@ -47,12 +43,8 @@ static void	z_down(t_fdf *dt, float x2, float y2)
 	float	x_start;
 	float	y_start;
 
-	dt->dx = x2 - dt->x1;
-	dt->dy = y2 - dt->y1;
-	if (dt->dx < 0)
-		dt->dx *= (-1);
-	if (dt->dy < 0)
-		dt->dy *= (-1);
+	dt->dx = fabsf(x2 - dt->x1);
+	dt->dy = fabsf(y2 - dt->y1);
 	s = dt->dy / dt->dx;
 	x_start = dt->x1;
 	y_start = dt->y1;

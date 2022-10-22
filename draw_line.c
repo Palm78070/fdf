@@ -6,7 +6,7 @@
 /*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 20:27:07 by rthammat          #+#    #+#             */
-/*   Updated: 2022/10/15 00:33:48 by rath             ###   ########.fr       */
+/*   Updated: 2022/10/22 16:47:21 by rath             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,14 @@ static void	x_inc(t_fdf *dt, float x2, float y2)
 	float	p;
 
 	xy_init(dt, &x, &y, &p);
+	/////////////////////////
+	dt->x2 = x2;
+	dt->y2 = y2;
+	/////////////////////////
 	while (x <= x2 || y != y2)
 	{
-		mlx_pixel_put(dt->mlx_ptr, dt->win_ptr, x, y, dt->c);
+		ft_pixel_put(dt, x, y, ft_blend_color(dt, x, y));
+		printf("color %i\n", ft_blend_color(dt, x, y));
 		check_x(&x, x2, '<');
 		if (p < 0)
 			p = p + (2 * dt->dy);
@@ -68,9 +73,14 @@ static void	x_dec(t_fdf *dt, float x2, float y2)
 	float	p;
 
 	xy_init(dt, &x, &y, &p);
+	/////////////////////////
+	dt->x2 = x2;
+	dt->y2 = y2;
+	/////////////////////////
 	while (x >= x2 || y != y2)
 	{
-		mlx_pixel_put(dt->mlx_ptr, dt->win_ptr, x, y, dt->c);
+		ft_pixel_put(dt, x, y, ft_blend_color(dt, x, y));
+		printf("color %i\n", ft_blend_color(dt, x, y));
 		check_x(&x, x2, '>');
 		if (p < 0)
 			p = p + (2 * dt->dy);

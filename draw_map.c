@@ -6,13 +6,13 @@
 /*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 21:37:13 by rthammat          #+#    #+#             */
-/*   Updated: 2022/10/15 02:44:30 by rath             ###   ########.fr       */
+/*   Updated: 2022/10/22 16:18:31 by rath             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	slope1(t_fdf *dt, float x2, float y2)
+static int	slope1(t_fdf *dt, float x2, float y2)
 {
 	float	s;
 
@@ -24,7 +24,7 @@ int	slope1(t_fdf *dt, float x2, float y2)
 	return (0);
 }
 
-void	choose_line(t_fdf *dt, float x2, float y2)
+static void	choose_line(t_fdf *dt, float x2, float y2)
 {
 	if (!slope1(dt, x2, y2))
 		z_line(dt, x2, y2);
@@ -32,35 +32,36 @@ void	choose_line(t_fdf *dt, float x2, float y2)
 		line(dt, x2, y2 );
 }
 
-void	check_draw(t_fdf *dt, int h, int w)
+static void	check_draw(t_fdf *dt, int h, int w)
 {
-	float	y2;
+	float	y_start;
 
 	dt->z = dt->tab[h][w].z * dt->zm;
-	dt->c = dt->tab[h][w].color;
+	//dt->c = dt->tab[h][w].color;
 	if (w + 1 <= dt->width - 1)
 		dt->zx = dt->tab[h][w + 1].z * dt->zm;
 	if (h + 1 <= dt->height - 1)
 		dt->zy = dt->tab[h + 1][w].z * dt->zm;
-	y2 = dt->y1;
+	y_start = dt->y1;
 	//////// h w ////////////////////////////
+	dt->color.c1 = dt->tab[h][w].color;
 	set_start(dt, dt->x1, dt->y1 - dt->z);
 	/////// h w+1 ///////////////////////////
-	if ((w < dt->width - 1) \
-		&& !slope1(dt, dt->x1 + dt->xsc, y2 - dt->ysc - dt->zx))
-		z_line(dt, dt->x1 + dt->xsc, y2 - dt->ysc - dt->zx);
-	else if (w < dt->width - 1)
-		line(dt, dt->x1 + dt->xsc, y2 - dt->ysc - dt->zx);
+	if (w < dt->width - 1)
+	{
+		dt->color.c2 = dt->tab[h][w + 1].color;
+		choose_line(dt, dt->x1 + dt->xsc, y_start - dt->ysc - dt->zx);
+	}
 	/////// h+1 w ///////////////////////////
-	if ((h < dt->height - 1) \
-		&& !slope1(dt, dt->x1 + dt->xsc, y2 + dt->ysc - dt->zy))
-		z_line(dt, dt->x1 + dt->xsc, y2 + dt->ysc - dt->zy);
-	else if (h < dt->height - 1)
-		line(dt, dt->x1 + dt->xsc, y2 + dt->ysc - dt->zy);
+	if (h < dt->height - 1)
+	{
+		dt->color.c2 = dt->tab[h + 1][w].color;
+		choose_line(dt, dt->x1 + dt->xsc, y_start + dt->ysc - dt->zy);
+	}
 	set_start(dt, dt->x1 + dt->xsc, dt->y1 + dt->z - dt->ysc);
 }
 
-void	draw4(t_fdf *dt)
+int	draw4(t_fdf *dt)
 {
 	int	w;
 	int	h;
@@ -80,4 +81,6 @@ void	draw4(t_fdf *dt)
 		x2 += dt->xsc;
 		set_start(dt, x2, y2);
 	}
+	mlx_put_image_to_window(dt, dt->win_ptr, dt->img.ptr, x2, y2);
+	return (0);
 }

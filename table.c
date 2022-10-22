@@ -6,7 +6,7 @@
 /*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 21:28:47 by rthammat          #+#    #+#             */
-/*   Updated: 2022/10/15 02:32:11 by rath             ###   ########.fr       */
+/*   Updated: 2022/10/20 10:00:19 by rath             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,28 +36,6 @@ void	clear_tab(t_tab **arr, int i)
 	free(arr);
 }
 
-/*int	**create_tab(t_fdf *dt)
-{
-	int	i;
-	int	**res;
-
-	i = -1;
-	res = (int **)malloc((dt->height) * sizeof(int *));
-	if (!res)
-		send_err(dt);
-	while (++i < dt->height)
-	{
-		res[i] = (int *)malloc(dt->width * sizeof(int));
-		if (!res[i])
-		{
-			clear_tab(res, i);
-			send_err(dt);
-		}
-		ft_memset(res[i], 0, sizeof(res[i]));/////////
-	}
-	return (res);
-}*/
-
 t_tab	**create_tab(t_fdf *dt)
 {
 	int	i;
@@ -79,43 +57,6 @@ t_tab	**create_tab(t_fdf *dt)
 	return (dt->tab);
 }
 
-/*void	insert_num(t_fdf *dt, char *s)
-{
-	static int	h = 0;
-	int	w;
-	char	**sp;
-
-	sp = ft_split(s, ' ');
-	if (!sp)
-	{
-		free_all(dt);
-		perror("error");
-		exit(1);
-	}
-	w = 0;
-	while (sp[w] != NULL)
-	{
-		dt->tab[h][w] = ft_atoi(sp[w]);
-		++w;
-	}
-	++h;
-	free_double(sp);
-}*/
-
-/*void	insert_num(t_fdf *dt, char *s, int h)
-{
-	int	w;
-	char	**sp;
-
-	sp = ft_split(s, ' ');
-	if (!sp)
-		send_err(dt);
-	w = -1;
-	while (sp[++w] != NULL)
-		dt->tab[h][w] = ft_atoi(sp[w]);
-	free_double(sp);
-}*/
-
 void	insert_num(t_fdf *dt, char *s, int h)
 {
 	int	w;
@@ -129,7 +70,6 @@ void	insert_num(t_fdf *dt, char *s, int h)
 	{
 		dt->tab[h][w].z = ft_atoi(sp[w]);
 		insert_color(dt, sp[w], h, w);
-		//dt->tab[h][w].color = 0xFFFFFF;
 	}
 	free_double(sp);
 }

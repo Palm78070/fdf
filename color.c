@@ -11,6 +11,8 @@ int	convert_hex(char *s)
 	res = 0;
 	c = 0;
 	n = 0;
+	if (s[len] == '\n')
+		--len;
 	while (len >= 0)
 	{
 		if (s[len] == 'x' || s[len] == 'X')
@@ -40,17 +42,6 @@ int	found_c(char *str, char c)
 	return (0);
 }
 
-/*void	fill_color(t_fdf *dt, char *s, int h, int w)
-{
-	char	*tmp;
-
-	tmp = ft_strchr(s, ',');
-	if (tmp == NULL)
-		send_err(dt);
-	++tmp;
-	dt->color[h][w] = convert_hex(tmp);
-}*/
-
 void	insert_color(t_fdf *dt, char *s, int h, int w)
 {
 	char	*tmp;
@@ -68,50 +59,44 @@ void	insert_color(t_fdf *dt, char *s, int h, int w)
 	dt->tab[h][w].color = convert_hex(tmp);
 }
 
-/*void	insert_color(t_fdf *dt, char *s, int h)
+int	find_gap(t_fdf *dt, float x, float y)
 {
-	int	w;
-	char	*tmp;
-	char	**sp;
+	if (fabsf(dt->x2 - dt->x1) > fabsf(dt->y2 - dt->y1))
+		return (fabsf(x - dt->x1));
+	else
+		return (fabsf(y - dt->y1));
+}
 
-	tmp = NULL;
-	sp = ft_split(s, ' ');
-	if (!sp)
-		send_err(dt);
-	w = 0;
-	while (sp[w] != NULL)
-	{
-		if (found_c(sp[w], ','))
-		{
-			tmp = ft_strchr(sp[w], ',');
-			if (tmp++ == NULL)
-				send_err(dt);
-			//++tmp;
-			dt->color[h][w] = convert_hex(tmp);
-		}
-		else
-			dt->color[h][w] = 0xFFFFFF;
-		++w;
-	}
-	free_double(sp);
-}*/
-
-/*void	fill_color(t_fdf *dt, char *file)
+int	ft_blend_color(t_fdf *dt, float x, float y)
 {
-	int	fd;
-	int	h;
-	char	*s;
+	float	dr;
+	float	dg;
+	float	db;
+	t_color	c;
 
-	fd = open(file, O_RDONLY);
-	h = 0;
-	if (fd < 0)
-		send_err(dt);
-	s = get_next_line(fd);
-	while (s != NULL)
-	{
-		insert_color(dt, s, h++);
-		free(s);
-		s = get_next_line(fd);
-	}
-	close(fd);
-}*/
+	c.r1 = (dt->color.c1 >> 16) & 0xFF;
+	c.g1 = (dt->color.c1 >> 8) & 0xFF;
+	c.b1 = dt->color.c1 & 0xFF;
+	c.r2 = (dt->color.c2 >> 16) & 0xFF;
+	c.g2 = (dt->color.c2 >> 8) & 0xFF;
+	c.b2 = dt->color.c2 & 0xFF;
+	c.line_gap = fmaxf(fabsf(dt->x2 - dt->x1), fabsf(dt->y2 - dt->y1));
+	c.gap = find_gap(dt, x, y);
+	if (c.gap > c.line_gap)
+		c.gap = c.line_gap;
+	c.gap_ratio = (c.gap / c.line_gap);
+	/*printf("c.gap %f\n", c.gap);
+	printf("c.line_gap %f\n", c.line_gap);
+	printf("c.gap_ratio %f\n", c.gap_ratio);*/
+	/*dr = (dt->color.c1 >> 16 & 0xFF) + ((c.r2 - c.r1) * c.gap_ratio);
+	dg = (dt->color.c1 >> 8 & 0xFF) + ((c.g2 - c.g1) * c.gap_ratio);
+	db = (dt->color.c1 & 0xFF) + ((c.b2 - c.b1) * c.gap_ratio);*/
+	dr = c.r1 + ((c.r2 - c.r1) * c.gap_ratio);
+	dg = c.g1 + ((c.g2 - c.g1) * c.gap_ratio);
+	db = c.b1 + ((c.b2 - c.b1) * c.gap_ratio);
+	/*printf("c.r2 - c.r1 * ratio %f\n", (c.r2 - c.r1) * c.gap_ratio);
+	printf("c.g2 - c.g1 * ratio %f\n", (c.g2 - c.g1) * c.gap_ratio);
+	printf("c.b2 - c.b1 * ratio %f\n", (c.b2 - c.b1) * c.gap_ratio);
+	printf("\n");*/
+	return (((int)dr << 16) | ((int)dg << 8) | (int)db);
+}

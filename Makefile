@@ -8,11 +8,13 @@ LIB_I = -Llibft -Lmlx
 
 SRCS = draw_line.c \
        table.c \
-       map_util.c \
+       util.c \
        draw_map.c \
-       test.c \
+       fdf.c \
        z_axis.c \
        color.c \
+       hook.c \
+       clear.c \
 
 all: $(NAME)
 
