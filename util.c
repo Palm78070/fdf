@@ -63,13 +63,13 @@ void	get_map_size(t_fdf *dt, char *input)
 	dt->width = get_width(input);
 	if (dt->height < 0 || dt->width < 0)
 	{
-		printf("Map size is less than 0\n");
+		ft_putstr_fd("Map size is less than 0\n", 1);
 		free_all(dt);
 		exit(1);
 	}
 }
 
-void	set_start(t_fdf *dt, float x, float y)
+void	set_xy1(t_fdf *dt, float x, float y)
 {
 	dt->x1 = x;
 	dt->y1 = y;

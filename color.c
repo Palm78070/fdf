@@ -61,10 +61,10 @@ void	insert_color(t_fdf *dt, char *s, int h, int w)
 
 int	find_gap(t_fdf *dt, float x, float y)
 {
-	if (fabsf(dt->x2 - dt->x1) > fabsf(dt->y2 - dt->y1))
-		return (fabsf(x - dt->x1));
+	if (fabsf(dt->color.x2 - dt->color.x1) > fabsf(dt->color.y2 - dt->color.y1))
+		return (fabsf(x - dt->color.x1));
 	else
-		return (fabsf(y - dt->y1));
+		return (fabsf(y - dt->color.y1));
 }
 
 int	ft_blend_color(t_fdf *dt, float x, float y)
@@ -80,7 +80,8 @@ int	ft_blend_color(t_fdf *dt, float x, float y)
 	c.r2 = (dt->color.c2 >> 16) & 0xFF;
 	c.g2 = (dt->color.c2 >> 8) & 0xFF;
 	c.b2 = dt->color.c2 & 0xFF;
-	c.line_gap = fmaxf(fabsf(dt->x2 - dt->x1), fabsf(dt->y2 - dt->y1));
+	c.line_gap = fmaxf(fabsf(dt->color.x2 - dt->color.x1),
+		fabsf(dt->color.y2 - dt->color.y1));
 	c.gap = find_gap(dt, x, y);
 	if (c.gap > c.line_gap)
 		c.gap = c.line_gap;
@@ -96,7 +97,7 @@ int	ft_blend_color(t_fdf *dt, float x, float y)
 	db = c.b1 + ((c.b2 - c.b1) * c.gap_ratio);
 	/*printf("c.r2 - c.r1 * ratio %f\n", (c.r2 - c.r1) * c.gap_ratio);
 	printf("c.g2 - c.g1 * ratio %f\n", (c.g2 - c.g1) * c.gap_ratio);
-	printf("c.b2 - c.b1 * ratio %f\n", (c.b2 - c.b1) * c.gap_ratio);
-	printf("\n");*/
+	printf("c.b2 - c.b1 * ratio %f\n", (c.b2 - c.b1) * c.gap_ratio);*/
+	//printf("\n");
 	return (((int)dr << 16) | ((int)dg << 8) | (int)db);
 }

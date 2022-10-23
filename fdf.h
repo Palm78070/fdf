@@ -6,7 +6,7 @@
 /*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 17:05:52 by rthammat          #+#    #+#             */
-/*   Updated: 2022/10/22 22:01:53 by rath             ###   ########.fr       */
+/*   Updated: 2022/10/23 16:47:59 by rath             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,13 @@ typedef struct f_color
 	int		r2;
 	int		g2;
 	int		b2;
-	float	line_gap;
-	float	gap;
-	float	gap_ratio;
+	float		x1;
+	float		y1;
+	float		x2;
+	float		y2;
+	float		line_gap;
+	float		gap;
+	float		gap_ratio;
 }	t_color;
 
 typedef struct f_fdf
@@ -60,11 +64,8 @@ typedef struct f_fdf
 	t_img	img;
 	t_color	color;
 	t_tab		**tab;
-	int		c;
 	float		x1;
 	float		y1;
-	float		x2;
-	float		y2;
 	float		z;
 	float		zx;
 	float		zy;
@@ -82,7 +83,6 @@ typedef struct f_fdf
 void	line(t_fdf *dt, float x2, float y2);
 //table.c
 void	free_tab(t_fdf *dt, t_tab **arr);
-void	ft_pixel_put(t_fdf *dt, int x, int y, int color);
 ///////////////////////////////////////
 void	clear_tab(t_tab **arr, int i);
 ///////////////////////////////////////
@@ -93,9 +93,10 @@ void	get_tab(t_fdf *dt, char *file);
 int		get_height(char *file);
 int		get_width(char *file);
 void	get_map_size(t_fdf *dt, char *input);
-void	set_start(t_fdf *dt, float x1, float y1);
+void	set_xy1(t_fdf *dt, float x1, float y1);
 //draw_map
-int	draw4(t_fdf *dt);
+void	ft_pixel_put(t_fdf *dt, int x, int y, int color);
+int	draw(t_fdf *dt);
 //test.c
 void	free_all(t_fdf *dt);
 void	send_err(t_fdf *dt);

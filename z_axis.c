@@ -10,7 +10,7 @@ static void	move(t_fdf *dt, float y2, float s, float mv)
 		line(dt, dt->x1 + mv, y2);
 	else
 		line(dt, dt->x1 + mv, dt->y1 - s);
-	set_start(dt, dt->x1 + (mv * 10), dt->y1 - s);
+	set_xy1(dt, dt->x1 + (mv * 10), dt->y1 - s);
 }
 
 static void	z_up(t_fdf *dt, float x2, float y2)
@@ -34,7 +34,7 @@ static void	z_up(t_fdf *dt, float x2, float y2)
 		while (dt->x1 > x2)
 			move(dt, y2, s, -0.1);
 	}
-	set_start(dt, x_start, y_start);
+	set_xy1(dt, x_start, y_start);
 }
 
 static void	z_down(t_fdf *dt, float x2, float y2)
@@ -58,7 +58,7 @@ static void	z_down(t_fdf *dt, float x2, float y2)
 		while (dt->x1 > x2)
 			move(dt, y2, s, -0.1);
 	}
-	set_start(dt, x_start, y_start);
+	set_xy1(dt, x_start, y_start);
 }
 
 void	z_line(t_fdf *dt, float x2, float y2)
