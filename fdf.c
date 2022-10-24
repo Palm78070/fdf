@@ -6,7 +6,7 @@
 /*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 20:17:49 by rthammat          #+#    #+#             */
-/*   Updated: 2022/10/23 20:57:13 by rath             ###   ########.fr       */
+/*   Updated: 2022/10/23 21:57:12 by rath             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,12 @@ float	get_image_size(t_fdf *dt)
 {
 	float	res;
 
-	if (check_hw_range(dt, 1, 9))
+	if (check_hw_range(dt, 1, 4))
 		res = 200;
-	if (check_hw_range(dt, 10, 19))
+	if (check_hw_range(dt, 5, 29))
 		res = 20;
-	if (check_hw_range(dt, 20, 49))
-		res = 10;
+	if (check_hw_range(dt, 30, 50))
+		res = 5;
 	if (check_hw_range(dt, 50, 69))
 		res = 5;
 	dt->xsc = res * cos(0.5236);

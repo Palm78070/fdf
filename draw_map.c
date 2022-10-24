@@ -6,7 +6,7 @@
 /*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 21:37:13 by rthammat          #+#    #+#             */
-/*   Updated: 2022/10/23 16:47:43 by rath             ###   ########.fr       */
+/*   Updated: 2022/10/23 22:21:05 by rath             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,12 @@ int	draw(t_fdf *dt)
 	float	y2;
 
 	h = -1;
-	x2 = (dt->sc_w / 5);
+	/*x2 = (dt->sc_w / 5);
 	y2 = dt->sc_h / 2 + 100;
-	set_xy1(dt, dt->sc_w / 5, dt->sc_h / 2 + 100);
+	set_xy1(dt, dt->sc_w / 5, dt->sc_h / 2 + 100);*/
+	x2 = (dt->sc_w / 2) - ((dt->width / 2) * dt->xsc) - 60;
+	y2 = dt->sc_h / 2 + 100;
+	set_xy1(dt, x2, y2);
 	while (++h < dt->height)
 	{
 		w = -1;
