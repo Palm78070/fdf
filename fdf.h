@@ -6,7 +6,7 @@
 /*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 17:05:52 by rthammat          #+#    #+#             */
-/*   Updated: 2022/10/23 16:47:59 by rath             ###   ########.fr       */
+/*   Updated: 2022/10/28 17:21:57 by rath             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ typedef struct f_fdf
 	t_img	img;
 	t_color	color;
 	t_tab		**tab;
+	float		x_start;
+	float		y_start;
 	float		x1;
 	float		y1;
 	float		z;
@@ -94,8 +96,15 @@ int		get_height(char *file);
 int		get_width(char *file);
 void	get_map_size(t_fdf *dt, char *input);
 void	set_xy1(t_fdf *dt, float x1, float y1);
+void	set_projection(t_fdf *dt);
+//scale.c
+int	find_x_edge(t_fdf *dt);
+void	mv_middle(t_fdf *dt, float x_last);
 //draw_map
 void	ft_pixel_put(t_fdf *dt, int x, int y, int color);
+/////////////////////////////////
+//int     find_x_edge2(t_fdf *dt);
+/////////////////////////////////
 int	draw(t_fdf *dt);
 //test.c
 void	free_all(t_fdf *dt);

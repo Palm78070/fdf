@@ -74,3 +74,9 @@ void	set_xy1(t_fdf *dt, float x, float y)
 	dt->x1 = x;
 	dt->y1 = y;
 }
+
+void	set_projection(t_fdf *dt)
+{
+	dt->xsc = dt->zm * cos(0.5236);
+	dt->ysc = dt->zm * sin(0.5236);
+}

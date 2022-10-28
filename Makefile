@@ -9,6 +9,7 @@ LIB_I = -Llibft -Lmlx
 SRCS = draw_line.c \
        table.c \
        util.c \
+       scale.c \
        draw_map.c \
        fdf.c \
        z_axis.c \
