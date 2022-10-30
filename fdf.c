@@ -6,7 +6,7 @@
 /*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 20:17:49 by rthammat          #+#    #+#             */
-/*   Updated: 2022/10/28 17:22:30 by rath             ###   ########.fr       */
+/*   Updated: 2022/10/30 19:12:28 by rath             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,19 @@ void	dt_init(t_fdf *dt)
 	dt->zm = 20;
 	dt->xsc = dt->zm * cos(0.5236);
 	dt->ysc = dt->zm * sin(0.5236);
-	//dt->xsc = 0;
-	//dt->ysc = 0;
+	////////
+	dt->img.ptr = NULL;
+	////////
 }
 
 int	main(int argc, char **argv)
 {
 	t_fdf	*dt;
 
-	if (argc <= 1)
+	if (argc <= 1 || argc > 2)
 	{
-		ft_putstr_fd("No file argument included\n", 2);
+		ft_putstr_fd("Too many argument or argument less than 1\n", 2);
+		ft_putstr_fd("Correct format => ./fdf file.fdf\n", 2);
 		exit(1);
 	}
 	dt = (t_fdf *)malloc(sizeof(t_fdf));
@@ -64,9 +66,7 @@ int	main(int argc, char **argv)
 	dt->img.ptr = mlx_new_image(dt->mlx_ptr, dt->sc_w, dt->sc_h);
 	dt->img.addr = mlx_get_data_addr(dt->img.ptr, &dt->img.bpp,
 			&dt->img.size_line, &dt->img.endian);
-	//find_x_edge2(dt);
 	draw(dt);
-	printf("zm %f\n", dt->zm);
 	/*int i = 0;
 	printf("\n");
 	while (i < dt->height)
@@ -81,6 +81,5 @@ int	main(int argc, char **argv)
 	mlx_hook(dt->win_ptr, 2, 1L << 0, &handle_key, dt);
 	mlx_hook(dt->win_ptr, 17, 0L, &handle_cross, dt);
 	mlx_loop(dt->mlx_ptr);
-	//free_all(dt);
 	return (0);
 }

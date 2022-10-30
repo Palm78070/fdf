@@ -6,7 +6,7 @@
 /*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 21:37:13 by rthammat          #+#    #+#             */
-/*   Updated: 2022/10/28 17:21:13 by rath             ###   ########.fr       */
+/*   Updated: 2022/10/29 22:41:28 by rath             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,32 +74,6 @@ static void	check_draw(t_fdf *dt, int h, int w)
 	set_xy1(dt, dt->x1 + dt->xsc, dt->y1 + dt->z - dt->ysc);
 }
 
-/*int	find_x_edge2(t_fdf *dt)
-{
-	int	w;
-	int	h;
-	float	x0;
-	float	y0;
-
-	h = 0;
-	w = -1;
-	x0 = dt->x_start;
-	y0 = dt->y_start;
-	set_xy1(dt, x0, y0);
-	set_projection(dt);
-	while (++w < dt->width)
-		check_draw(dt, h, w);
-	set_xy1(dt, dt->x1 - dt->xsc + dt->xsc, dt->y1 + dt->ysc + dt->ysc);
-	line(dt, dt->x1, dt->y1 - 100);
-	h = -1;
-	while (++h < dt->height)
-	{
-		line(dt, dt->x1 + dt->xsc, dt->y1 + dt->ysc);
-		set_xy1(dt, dt->x1 + dt->xsc, dt->y1 + dt->ysc);
-	}
-	return (dt->x1);
-}*/
-
 int	draw(t_fdf *dt)
 {
 	int	w;
@@ -111,8 +85,6 @@ int	draw(t_fdf *dt)
 	x0 = dt->x_start;
 	y0 = dt->y_start;
 	set_xy1(dt, x0, y0);
-	printf("x_start %f\n", dt->x1);
-	printf("y_start %f\n", dt->y1);
 	while (++h < dt->height)
 	{
 		w = -1;

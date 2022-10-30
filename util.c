@@ -9,10 +9,7 @@ int	get_height(char *file)
 	fd = open(file, O_RDONLY);
 	count = 0;
 	if (fd < 0)
-	{
-		perror("error");
 		return (-1);
-	}
 	s = get_next_line(fd);
 	while (s != NULL)
 	{
@@ -35,10 +32,7 @@ int	get_width(char *file)
 	fd = open(file, O_RDONLY);
 	count = 0;
 	if (fd < 0)
-	{
-		perror("error");
 		return (-1);
-	}
 	s = get_next_line(fd);
 	if (s != NULL)
 	{
@@ -63,7 +57,7 @@ void	get_map_size(t_fdf *dt, char *input)
 	dt->width = get_width(input);
 	if (dt->height < 0 || dt->width < 0)
 	{
-		ft_putstr_fd("Map size is less than 0\n", 1);
+		ft_putstr_fd("Incorrect input format : ./fdf file.fdf\n", 1);
 		free_all(dt);
 		exit(1);
 	}

@@ -6,7 +6,7 @@
 /*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 21:28:47 by rthammat          #+#    #+#             */
-/*   Updated: 2022/10/28 17:29:27 by rath             ###   ########.fr       */
+/*   Updated: 2022/10/29 22:58:27 by rath             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ t_tab	**create_tab(t_fdf *dt)
 			clear_tab(dt->tab, i);
 			send_err(dt);
 		}
-		ft_memset(dt->tab[i], 0, sizeof(t_tab[i]));/////////
+		ft_memset(dt->tab[i], 0, sizeof(t_tab[i]));
 	}
 	return (dt->tab);
 }
@@ -71,8 +71,6 @@ void	set_zm(t_fdf *dt, int h, int z)
 		dt->ysc = dt->zm * sin(0.5236);
 		y_pos = dt->y_start - (h * dt->ysc) - (z * dt->zm);
 	}
-	//dt->ysc = dt->zm * sin(0.5236);
-	//dt->xsc = dt->zm * cos(0.5236);
 	set_projection(dt);
 }
 
@@ -88,7 +86,6 @@ void	insert_num(t_fdf *dt, char *s, int h)
 	while (sp[++w] != NULL)
 	{
 		dt->tab[h][w].z = ft_atoi(sp[w]);
-		set_zm(dt, h, dt->tab[h][w].z);
 		insert_color(dt, sp[w], h, w);
 	}
 	free_double(sp);
@@ -105,11 +102,8 @@ void	get_tab(t_fdf *dt, char *file)
 	if (fd < 0)
 		send_err(dt);
 	s = get_next_line(fd);
-	//dt->x_start = dt->sc_w * 0.25;
-	//dt->x_start = dt->sc_w * 0.1875;
 	dt->x_start = dt->sc_w * 0.25;
-	dt->y_start = dt->sc_h / 2;
-	//dt->y_start = dt->sc_h / 2 + 30;
+	dt->y_start = dt->sc_h / 2 + 50;
 	dt->tab = create_tab(dt);
 	while (s != NULL)
 	{
@@ -117,17 +111,8 @@ void	get_tab(t_fdf *dt, char *file)
 		free(s);
 		s = get_next_line(fd);
 	}
-	//while (find_x_edge(dt) > (dt->sc_w * 0.75))
-	//while (find_x_edge(dt) > (dt->sc_w * 0.8125))
-	//while (find_x_edge(dt) > (dt->sc_w * 0.75))
-	while (find_x_edge(dt) > (dt->sc_w))
+	while (!find_x_edge(dt))
 		dt->zm -= 0.1;	
-	/*if (dt->zm > 0 && (dt->height >= 500 || dt->width >= 500))
-		dt->zm = ceil(dt->zm) - 0.5;
-	else
-		dt->zm = ceil(dt->zm) - 0.1;*/
-	//printf("x_last %f\n", dt->x1);
-	//dt->zm = 5;
 	set_projection(dt);
 	mv_middle(dt, dt->x1);
 	close(fd);

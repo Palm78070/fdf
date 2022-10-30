@@ -6,7 +6,7 @@
 /*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 17:05:52 by rthammat          #+#    #+#             */
-/*   Updated: 2022/10/28 17:21:57 by rath             ###   ########.fr       */
+/*   Updated: 2022/10/29 23:01:51 by rath             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ void	free_tab(t_fdf *dt, t_tab **arr);
 ///////////////////////////////////////
 void	clear_tab(t_tab **arr, int i);
 ///////////////////////////////////////
-//int		**create_tab(t_fdf *dt);
 t_tab		**create_tab(t_fdf *dt);
 void	get_tab(t_fdf *dt, char *file);
 //util.c
@@ -102,9 +101,6 @@ int	find_x_edge(t_fdf *dt);
 void	mv_middle(t_fdf *dt, float x_last);
 //draw_map
 void	ft_pixel_put(t_fdf *dt, int x, int y, int color);
-/////////////////////////////////
-//int     find_x_edge2(t_fdf *dt);
-/////////////////////////////////
 int	draw(t_fdf *dt);
 //test.c
 void	free_all(t_fdf *dt);
