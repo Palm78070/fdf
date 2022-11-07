@@ -6,7 +6,7 @@
 /*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 21:28:47 by rthammat          #+#    #+#             */
-/*   Updated: 2022/11/08 06:08:56 by rath             ###   ########.fr       */
+/*   Updated: 2022/11/08 06:58:02 by rath             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ t_tab	**create_tab(t_fdf *dt)
 			clear_tab(dt->tab, i);
 			send_err(dt);
 		}
-		ft_memset(dt->tab[i], 0, sizeof(t_tab));
+		ft_memset(dt->tab[i], 0, sizeof(t_tab) * dt->width);
 	}
 	return (dt->tab);
 }
