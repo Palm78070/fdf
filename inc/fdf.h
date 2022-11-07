@@ -6,16 +6,16 @@
 /*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 17:05:52 by rthammat          #+#    #+#             */
-/*   Updated: 2022/10/29 23:01:51 by rath             ###   ########.fr       */
+/*   Updated: 2022/11/03 13:53:42 by rath             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
-# include "libft/libft.h"
-# include "libft/get_next_line.h"
-# include "mlx/mlx.h"
+# include "libft.h"
+# include "get_next_line.h"
+# include "mlx.h"
 # include <unistd.h>
 # include <fcntl.h>
 # include <math.h>
@@ -85,9 +85,7 @@ typedef struct f_fdf
 void	line(t_fdf *dt, float x2, float y2);
 //table.c
 void	free_tab(t_fdf *dt, t_tab **arr);
-///////////////////////////////////////
 void	clear_tab(t_tab **arr, int i);
-///////////////////////////////////////
 t_tab		**create_tab(t_fdf *dt);
 void	get_tab(t_fdf *dt, char *file);
 //util.c
