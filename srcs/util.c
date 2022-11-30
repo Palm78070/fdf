@@ -1,6 +1,6 @@
 #include "fdf.h"
 
-int	get_height(char *file)
+static int	get_height(char *file)
 {
 	int	fd;
 	int	count;
@@ -22,7 +22,7 @@ int	get_height(char *file)
 	return (count);
 }
 
-int	get_width(char *file)
+static int	get_width(char *file)
 {
 	int	fd;
 	int	count;
@@ -57,7 +57,8 @@ void	get_map_size(t_fdf *dt, char *input)
 	dt->width = get_width(input);
 	if (dt->height < 0 || dt->width < 0)
 	{
-		ft_putstr_fd("Incorrect input format : ./fdf file.fdf\n", 1);
+		ft_putstr_fd("Incorrect input format : ", 1);
+		ft_putstr_fd("height or width of map is less than 0\n", 1);
 		free_all(dt);
 		exit(1);
 	}

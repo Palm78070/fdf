@@ -6,7 +6,7 @@
 /*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 21:37:13 by rthammat          #+#    #+#             */
-/*   Updated: 2022/10/29 22:41:28 by rath             ###   ########.fr       */
+/*   Updated: 2022/11/24 16:12:48 by rath             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,16 +56,13 @@ static void	check_draw(t_fdf *dt, int h, int w)
 	if (h + 1 <= dt->height - 1)
 		dt->zy = dt->tab[h + 1][w].z * dt->zm;
 	y_start = dt->y1;
-	//////// h w ////////////////////////////
 	dt->color.c1 = dt->tab[h][w].color;
 	set_xy1(dt, dt->x1, dt->y1 - dt->z);
-	/////// h w+1 ///////////////////////////
 	if (w < dt->width - 1)
 	{
 		dt->color.c2 = dt->tab[h][w + 1].color;
 		choose_line(dt, dt->x1 + dt->xsc, y_start - dt->ysc - dt->zx);
 	}
-	/////// h+1 w ///////////////////////////
 	if (h < dt->height - 1)
 	{
 		dt->color.c2 = dt->tab[h + 1][w].color;

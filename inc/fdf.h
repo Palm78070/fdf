@@ -6,7 +6,7 @@
 /*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 17:05:52 by rthammat          #+#    #+#             */
-/*   Updated: 2022/11/03 13:53:42 by rath             ###   ########.fr       */
+/*   Updated: 2022/11/24 16:24:57 by rath             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,34 +80,27 @@ typedef struct f_fdf
 	float		ysc;
 }	t_fdf;
 
-//drawline.c:w
-
+//drawline.c
 void	line(t_fdf *dt, float x2, float y2);
 //table.c
 void	free_tab(t_fdf *dt, t_tab **arr);
-void	clear_tab(t_tab **arr, int i);
-t_tab		**create_tab(t_fdf *dt);
 void	get_tab(t_fdf *dt, char *file);
 //util.c
-int		get_height(char *file);
-int		get_width(char *file);
 void	get_map_size(t_fdf *dt, char *input);
 void	set_xy1(t_fdf *dt, float x1, float y1);
 void	set_projection(t_fdf *dt);
 //scale.c
 int	find_x_edge(t_fdf *dt);
 void	mv_middle(t_fdf *dt, float x_last);
-//draw_map
+//draw_map.c
 void	ft_pixel_put(t_fdf *dt, int x, int y, int color);
 int	draw(t_fdf *dt);
-//test.c
+//fdf.c
 void	free_all(t_fdf *dt);
 void	send_err(t_fdf *dt);
 //z_axis.c
 void	z_line(t_fdf *dt, float x2, float y2);
 //color.c
-int		convert_hex(char *s);
-int		found_c(char *str, char c);
 void	insert_color(t_fdf *dt, char *s, int h, int w);
 int		offset(t_fdf *dt, float x, float y);
 int		ft_blend_color(t_fdf *dt, float x, float y);

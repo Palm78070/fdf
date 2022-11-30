@@ -6,7 +6,7 @@
 /*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 21:28:47 by rthammat          #+#    #+#             */
-/*   Updated: 2022/11/08 06:58:02 by rath             ###   ########.fr       */
+/*   Updated: 2022/11/23 18:09:38 by rath             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	free_tab(t_fdf *dt, t_tab **arr)
 	arr = NULL;
 }
 
-void	clear_tab(t_tab **arr, int i)
+static void	clear_tab(t_tab **arr, int i)
 {
 	while(i >= 0)
 	{
@@ -36,7 +36,7 @@ void	clear_tab(t_tab **arr, int i)
 	free(arr);
 }
 
-t_tab	**create_tab(t_fdf *dt)
+static t_tab	**create_tab(t_fdf *dt)
 {
 	int	i;
 
@@ -57,24 +57,7 @@ t_tab	**create_tab(t_fdf *dt)
 	return (dt->tab);
 }
 
-void	set_zm(t_fdf *dt, int h, int z)
-{
-	float	edge;
-	float	y_pos;
-
-	edge = 0.3;
-	dt->ysc = dt->zm * sin(0.5236);
-	y_pos = dt->y_start - (h * dt->ysc) - (z * dt->zm);
-	while (fabsf(y_pos - dt->y_start) > (dt->sc_h * edge))
-	{
-		dt->zm -= 0.1;
-		dt->ysc = dt->zm * sin(0.5236);
-		y_pos = dt->y_start - (h * dt->ysc) - (z * dt->zm);
-	}
-	set_projection(dt);
-}
-
-void	insert_num(t_fdf *dt, char *s, int h)
+static void	insert_num(t_fdf *dt, char *s, int h)
 {
 	int	w;
 	char	**sp;

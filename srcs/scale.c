@@ -21,6 +21,14 @@ static int	check_first_row(t_fdf *dt, int h, int w)
 	return (1);
 }
 
+static void var_init(t_fdf *dt, float *x0, float *y0)
+{
+	*x0 = dt->x_start;
+	*y0 = dt->y_start;
+	set_xy1(dt, *x0, *y0);
+	set_projection(dt);
+}
+
 int	find_x_edge(t_fdf *dt)
 {
 	int	w;
@@ -30,10 +38,7 @@ int	find_x_edge(t_fdf *dt)
 
 	h = 0;
 	w = -1;
-	x0 = dt->x_start;
-	y0 = dt->y_start;
-	set_xy1(dt, x0, y0);
-	set_projection(dt);
+	var_init(dt, &x0, &y0);
 	while (++w < dt->width)
 	{
 		if (dt->x1 > dt->sc_w || dt->y1 - 150 < 0)

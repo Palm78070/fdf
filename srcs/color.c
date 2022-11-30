@@ -1,6 +1,6 @@
 #include "fdf.h"
 
-int	convert_hex(char *s)
+static int	convert_hex(char *s)
 {
 	int	len;
 	int	res;
@@ -29,7 +29,7 @@ int	convert_hex(char *s)
 	return (res);
 }
 
-int	found_c(char *str, char c)
+static int	found_c(char *str, char c)
 {
 	int	i;
 
@@ -56,11 +56,10 @@ void	insert_color(t_fdf *dt, char *s, int h, int w)
 	if (tmp == NULL)
 		send_err(dt);
 	++tmp;
-	dt->tab[h][w].color = 0xFFFFFF;
 	dt->tab[h][w].color = convert_hex(tmp);
 }
 
-int	find_gap(t_fdf *dt, float x, float y)
+static int	find_gap(t_fdf *dt, float x, float y)
 {
 	if (fabsf(dt->color.x2 - dt->color.x1) > fabsf(dt->color.y2 - dt->color.y1))
 		return (fabsf(x - dt->color.x1));

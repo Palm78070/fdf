@@ -6,13 +6,13 @@
 /*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 20:17:49 by rthammat          #+#    #+#             */
-/*   Updated: 2022/11/08 06:06:14 by rath             ###   ########.fr       */
+/*   Updated: 2022/11/23 17:54:24 by rath             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	dt_init(t_fdf *dt)
+static void	dt_init(t_fdf *dt)
 {
 	dt->mlx_ptr = NULL;
 	dt->sc_w = 800;
@@ -36,7 +36,7 @@ void	dt_init(t_fdf *dt)
 	dt->img.ptr = NULL;
 }
 
-void	init_setup(t_fdf *dt, char *input)
+static void	init_setup(t_fdf *dt, char *input)
 {
 	ft_memset(dt, 0, sizeof(t_fdf));
 	dt_init(dt);
@@ -44,7 +44,7 @@ void	init_setup(t_fdf *dt, char *input)
 	get_tab(dt, input);
 }
 
-void	mlx_setup(t_fdf *dt)
+static void	mlx_setup(t_fdf *dt)
 {
 	dt->mlx_ptr = mlx_init();
 	if (!dt->mlx_ptr)
@@ -71,15 +71,6 @@ int	main(int argc, char **argv)
 		exit(1);
 	init_setup(dt, argv[1]);
 	mlx_setup(dt);
-	/*dt->mlx_ptr = mlx_init();
-	if (!dt->mlx_ptr)
-		send_err(dt);
-	dt->win_ptr = mlx_new_window(dt->mlx_ptr, dt->sc_w, dt->sc_h, "fdf");
-	if (!dt->win_ptr)
-		send_err(dt);
-	dt->img.ptr = mlx_new_image(dt->mlx_ptr, dt->sc_w, dt->sc_h);
-	dt->img.addr = mlx_get_data_addr(dt->img.ptr, &dt->img.bpp,
-			&dt->img.size_line, &dt->img.endian);*/
 	draw(dt);
 	mlx_put_image_to_window(dt->mlx_ptr, dt->win_ptr, dt->img.ptr, 0, 0);
 	mlx_hook(dt->win_ptr, 2, 1L << 0, &handle_key, dt);
