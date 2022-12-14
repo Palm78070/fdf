@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   color.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/14 01:57:07 by rthammat          #+#    #+#             */
+/*   Updated: 2022/12/14 01:59:56 by rthammat         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
 static int	convert_hex(char *s)
@@ -81,7 +93,7 @@ int	ft_blend_color(t_fdf *dt, float x, float y)
 	c.g2 = (dt->color.c2 >> 8) & 0xFF;
 	c.b2 = dt->color.c2 & 0xFF;
 	c.line_gap = fmaxf(fabsf(dt->color.x2 - dt->color.x1),
-		fabsf(dt->color.y2 - dt->color.y1));
+			fabsf(dt->color.y2 - dt->color.y1));
 	c.gap = find_gap(dt, x, y);
 	if (c.gap > c.line_gap)
 		c.gap = c.line_gap;

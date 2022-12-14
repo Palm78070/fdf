@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   scale.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/14 11:33:48 by rthammat          #+#    #+#             */
+/*   Updated: 2022/12/14 11:35:47 by rthammat         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
 static int	check_first_row(t_fdf *dt, int h, int w)
@@ -21,7 +33,7 @@ static int	check_first_row(t_fdf *dt, int h, int w)
 	return (1);
 }
 
-static void var_init(t_fdf *dt, float *x0, float *y0)
+static void	var_init(t_fdf *dt, float *x0, float *y0)
 {
 	*x0 = dt->x_start;
 	*y0 = dt->y_start;
@@ -31,8 +43,8 @@ static void var_init(t_fdf *dt, float *x0, float *y0)
 
 int	find_x_edge(t_fdf *dt)
 {
-	int	w;
-	int	h;
+	int		w;
+	int		h;
 	float	x0;
 	float	y0;
 

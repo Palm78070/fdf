@@ -6,7 +6,7 @@
 /*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 21:37:13 by rthammat          #+#    #+#             */
-/*   Updated: 2022/11/24 16:12:48 by rath             ###   ########.fr       */
+/*   Updated: 2022/12/14 11:32:49 by rthammat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	choose_line(t_fdf *dt, float x2, float y2)
 	if (!slope1(dt, x2, y2))
 		z_line(dt, x2, y2);
 	else
-		line(dt, x2, y2 );
+		line(dt, x2, y2);
 }
 
 static void	check_draw(t_fdf *dt, int h, int w)
@@ -73,8 +73,8 @@ static void	check_draw(t_fdf *dt, int h, int w)
 
 int	draw(t_fdf *dt)
 {
-	int	w;
-	int	h;
+	int		w;
+	int		h;
 	float	x0;
 	float	y0;
 

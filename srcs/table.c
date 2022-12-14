@@ -6,7 +6,7 @@
 /*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 21:28:47 by rthammat          #+#    #+#             */
-/*   Updated: 2022/11/23 18:09:38 by rath             ###   ########.fr       */
+/*   Updated: 2022/12/14 11:48:37 by rthammat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	free_tab(t_fdf *dt, t_tab **arr)
 
 static void	clear_tab(t_tab **arr, int i)
 {
-	while(i >= 0)
+	while (i >= 0)
 	{
 		free(arr[i]);
 		--i;
@@ -59,7 +59,7 @@ static t_tab	**create_tab(t_fdf *dt)
 
 static void	insert_num(t_fdf *dt, char *s, int h)
 {
-	int	w;
+	int		w;
 	char	**sp;
 
 	sp = ft_split(s, ' ');
@@ -76,8 +76,8 @@ static void	insert_num(t_fdf *dt, char *s, int h)
 
 void	get_tab(t_fdf *dt, char *file)
 {
-	int	fd;
-	int	h;
+	int		fd;
+	int		h;
 	char	*s;
 
 	fd = open(file, O_RDONLY);
@@ -95,7 +95,7 @@ void	get_tab(t_fdf *dt, char *file)
 		s = get_next_line(fd);
 	}
 	while (!find_x_edge(dt))
-		dt->zm -= 0.1;	
+		dt->zm -= 0.1;
 	set_projection(dt);
 	mv_middle(dt, dt->x1);
 	close(fd);

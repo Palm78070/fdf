@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   util.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/14 11:52:43 by rthammat          #+#    #+#             */
+/*   Updated: 2022/12/14 11:53:24 by rthammat         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
 static int	get_height(char *file)
 {
-	int	fd;
-	int	count;
+	int		fd;
+	int		count;
 	char	*s;
 
 	fd = open(file, O_RDONLY);
@@ -24,8 +36,8 @@ static int	get_height(char *file)
 
 static int	get_width(char *file)
 {
-	int	fd;
-	int	count;
+	int		fd;
+	int		count;
 	char	*s;
 	char	**s2;
 
