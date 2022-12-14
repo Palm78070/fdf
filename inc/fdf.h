@@ -6,7 +6,7 @@
 /*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 17:05:52 by rthammat          #+#    #+#             */
-/*   Updated: 2022/12/14 21:15:46 by rthammat         ###   ########.fr       */
+/*   Updated: 2022/12/15 02:35:15 by rath             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ int		handle_key(int key_code, t_fdf *dt);
 int		handle_cross(t_fdf *dt);
 //check.c
 int		check_str_input(char *s);
-int		filename_ok(char *s);
+void		check_filename(char *s);
 //clear.c
 void	free_all(t_fdf *dt);
 void	send_err(t_fdf *dt);

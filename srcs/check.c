@@ -6,7 +6,7 @@
 /*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 21:01:01 by rthammat          #+#    #+#             */
-/*   Updated: 2022/12/14 21:35:16 by rath             ###   ########.fr       */
+/*   Updated: 2022/12/15 02:37:08 by rath             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,18 +61,24 @@ int	check_str_input(char *s)
 	return (1);
 }
 
-int	filename_ok(char *s)
+void	check_filename(char *s)
 {
 	int	len;
+	int	res;
 
 	len = ft_strlen(s) - 4;
+	res = 1;
 	if (s[len] != '.')
-		return (0);
+		res = 0;
 	if (s[len + 1] != 'f')
-		return (0);
+		res = 0;
 	if (s[len + 2] != 'd')
-		return (0);
+		res = 0;
 	if (s[len + 3] != 'f')
-		return (0);
-	return (1);
+		res = 0;
+	if (res == 0)
+	{
+		ft_putstr_fd("Incorrect file name => filename.fdf\n", 2);
+		exit(1);
+	}
 }
