@@ -6,7 +6,7 @@
 /*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 21:01:01 by rthammat          #+#    #+#             */
-/*   Updated: 2022/12/14 21:12:32 by rthammat         ###   ########.fr       */
+/*   Updated: 2022/12/14 21:35:16 by rath             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,8 @@ static int	check_color_format(char *s)
 
 static int	char_ok(char *s)
 {
-	if (s[0] == '0')
-	{
-		if (s[1] != ' ')
-			return (0);
-		if (s[1] != ',')
-			return (0);
-		if (s[1] != '\n')
-			return (0);
-		if (s[1] != '\0')
-			return (0);
-	}
+	if (s[1] != ' ' && s[1] != ',' && s[1] != '\n' && s[1] != '\0')
+		return (0);
 	return (1);
 }
 
@@ -51,7 +42,7 @@ int	check_str_input(char *s)
 	int	i;
 
 	i = -1;
-	if (char_ok(s))
+	if (s[0] == '0' && !char_ok(s))
 		return (0);
 	if (s[0] == '-')
 		i = 1;
