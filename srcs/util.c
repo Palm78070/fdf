@@ -6,7 +6,7 @@
 /*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 11:52:43 by rthammat          #+#    #+#             */
-/*   Updated: 2022/12/14 11:53:24 by rthammat         ###   ########.fr       */
+/*   Updated: 2022/12/14 19:34:02 by rath             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	get_map_size(t_fdf *dt, char *input)
 	dt->width = get_width(input);
 	if (dt->height < 0 || dt->width < 0)
 	{
-		ft_putstr_fd("Incorrect input format : ", 1);
+		ft_putstr_fd("Incorrect input format : Incorrect file name or ", 1);
 		ft_putstr_fd("height or width of map is less than 0\n", 1);
 		free_all(dt);
 		exit(1);

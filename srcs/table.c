@@ -6,7 +6,7 @@
 /*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 21:28:47 by rthammat          #+#    #+#             */
-/*   Updated: 2022/12/14 11:48:37 by rthammat         ###   ########.fr       */
+/*   Updated: 2022/12/14 21:13:39 by rthammat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,15 +61,26 @@ static void	insert_num(t_fdf *dt, char *s, int h)
 {
 	int		w;
 	char	**sp;
+	int		input_ok;
 
 	sp = ft_split(s, ' ');
+	input_ok = 1;
 	if (!sp)
 		send_err(dt);
 	w = -1;
 	while (sp[++w] != NULL)
 	{
+		input_ok = check_str_input(sp[w]);
+		if (!input_ok)
+			break ;
 		dt->tab[h][w].z = ft_atoi(sp[w]);
 		insert_color(dt, sp[w], h, w);
+	}
+	if (w == 1 || !input_ok)
+	{
+		ft_putstr_fd("Map has incorrect format\n", 2);
+		free_all(dt);
+		exit(1);
 	}
 	free_double(sp);
 }

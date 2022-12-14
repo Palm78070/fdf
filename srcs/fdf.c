@@ -6,7 +6,7 @@
 /*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 20:17:49 by rthammat          #+#    #+#             */
-/*   Updated: 2022/11/23 17:54:24 by rath             ###   ########.fr       */
+/*   Updated: 2022/12/14 20:18:09 by rath             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	main(int argc, char **argv)
 {
 	t_fdf	*dt;
 
-	if (argc <= 1 || argc > 2)
+	if (argc <= 1 || argc > 2 || !filename_ok(argv[1]))
 	{
 		ft_putstr_fd("Incorrect parameter => ./fdf file.fdf\n", 2);
 		exit(1);

@@ -6,7 +6,7 @@
 /*   By: rthammat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 17:05:52 by rthammat          #+#    #+#             */
-/*   Updated: 2022/12/14 01:54:45 by rthammat         ###   ########.fr       */
+/*   Updated: 2022/12/14 21:15:46 by rthammat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,9 @@ int		ft_blend_color(t_fdf *dt, float x, float y);
 //hook.c
 int		handle_key(int key_code, t_fdf *dt);
 int		handle_cross(t_fdf *dt);
+//check.c
+int		check_str_input(char *s);
+int		filename_ok(char *s);
 //clear.c
 void	free_all(t_fdf *dt);
 void	send_err(t_fdf *dt);

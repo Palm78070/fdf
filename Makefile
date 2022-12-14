@@ -19,15 +19,16 @@ INC = -Iinc -Ilibft -Ilibft/libft -Imlx
 
 SRCS_DIR = srcs/
 SRCS = draw_line.c \
-       table.c \
-       util.c \
-       scale.c \
-       draw_map.c \
-       fdf.c \
-       z_axis.c \
-       color.c \
-       hook.c \
-       clear.c \
+	table.c \
+	util.c \
+	scale.c \
+	draw_map.c \
+	fdf.c \
+	z_axis.c \
+	color.c \
+	hook.c \
+	check.c \
+	clear.c \
 
 OBJS_DIR = objs/
 OBJS = $(addprefix $(OBJS_DIR), $(SRCS:.c=.o))
