@@ -50,7 +50,7 @@ $(LIBFT):
 	@make -C ./libft
 
 norminette:
-	norminette -R CheckForbiddenHeader inc/*.h srcs/*.c
+	norminette -R CheckForbiddenSourceHeader inc/*.h srcs/*.c
 
 clean:
 	@make fclean -C ./libft
